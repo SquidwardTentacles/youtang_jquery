@@ -1,0 +1,42 @@
+.flexbox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.flexbox.between {
+  justify-content: space-between;
+}
+.flexbox.a-start {
+  align-items: flex-start;
+}
+.flexbox.j-end {
+  justify-content: flex-end;
+}
+.flexbox.j-start {
+  justify-content: flex-start;
+}
+.flexbox.j-center {
+  justify-content: center;
+}
+a {
+  text-decoration: none;
+}
+p,
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
+}
+li {
+  margin-bottom: 0;
+  list-style: none;
+}
+.nav ul {
+  margin: 0;
+}
+.width {
+  max-width: 1400px;
+  min-width: 1200px;
+  margin: 0 auto;
+}
