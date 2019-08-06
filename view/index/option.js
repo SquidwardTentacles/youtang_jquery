@@ -128,7 +128,8 @@ $(document).ready(function() {
       mouseEvent();
     }
   };
-  window.addEventListener('scroll', handleScroll, true);
+  // 暂时注释
+  // window.addEventListener('scroll', handleScroll, true);
 
   let mouseEvent = function() {
     // 内容的鼠标移入移除事件
