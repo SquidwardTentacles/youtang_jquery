@@ -13,6 +13,19 @@
       rel="stylesheet"
       href="../../static/js/bootstrap-3.3.7-dist/css/bootstrap.min.css"
     />
+    <script src="../../static/js/jquery.min.js"></script>
+
+    <!-- art-template -->
+    <script src="../../static/js/template-web.js"></script>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script
+      src="../../static/js/bootstrap-3.3.7-dist/js/bootstrap.min.js"
+      type="text/javascript"
+    ></script>
+    <script src="./option.js"></script>
+    <script src="./index.js"></script>
   </head>
   <body>
     <div class="nav">
@@ -136,90 +149,42 @@
       </div>
 
       <div class="width content-box">
-        <ul class=" flexbox between">
-          <script type="text/html" id="content_list">
-            {{each data}}
+        <ul class=" flexbox j-start" id="contentBoxList">
+          <!-- <script type="text/html" id="list_temp2">
+            {{ each list }}
             <li>
               <div class="outer-box">
                 <div class="show-box">
                   <div class="img-box">
-                    <img src="../../static//images/1122.jpg" alt="" />
+                    <img src="{{$value.cover_thumb_url}}" alt="" />
+                    <video autoplay="autoplay" loop="loop" src="{{$value.low_video_url}}"></video>
                   </div>
-                  <div class="title-box flexbox between">
-                    <span>生入夏花</span>
-                    <span>自由模板</span>
+                  <div class="title-box">
+                    <span>{{$value.title}}</span>
+                    <span>自由入模板</span>
+                  </div>
+                  <div class="title-box flexbox between use">
+                    <span>使用</span>
                   </div>
                 </div>
               </div>
             </li>
             {{/each}}
-          </script>
-          <li>
-            <div class="outer-box">
-              <div class="show-box">
-                <div class="img-box">
-                  <img src="../../static//images/1122.jpg" alt="" />
-                </div>
-                <div class="title-box flexbox between">
-                  <span>生入夏花</span>
-                  <span>自由模板</span>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="outer-box">
-              <div class="show-box">
-                <div class="img-box">
-                  <img src="../../static//images/1122.jpg" alt="" />
-                </div>
-                <div class="title-box flexbox between">
-                  <span>生入夏花</span>
-                  <span>自由模板</span>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="outer-box">
-              <div class="show-box">
-                <div class="img-box">
-                  <img src="../../static//images/1122.jpg" alt="" />
-                </div>
-                <div class="title-box flexbox between">
-                  <span>生入夏花</span>
-                  <span>自由模板</span>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="outer-box">
-              <div class="show-box">
-                <div class="img-box">
-                  <img src="../../static//images/1122.jpg" alt="" />
-                </div>
-                <div class="title-box flexbox between">
-                  <span>生入夏花</span>
-                  <span>自由模板</span>
-                </div>
-              </div>
-            </div>
-          </li>
+          </script> -->
         </ul>
       </div>
     </div>
+    <!-- <div class="masker">
+      <div class="inmasker">
+        <p class="title">提示</p>
+        <div class="content">
+          <p>提示文本</p>
+        </div>
+        <div class="btnbox">
+          <div class="reback">确认</div>
+          <div class="cancel">取消</div>
+        </div>
+      </div>
+    </div> -->
   </body>
-  <!-- art-template -->
-  <script src="../../static/js/art-template.js"></script>
-  <!-- axios -->
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="../../static/js/jquery.min.js"></script>
-  <script src="./index.js"></script>
-
-  <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-  <script
-    src="../../static/js/bootstrap-3.3.7-dist/js/bootstrap.min.js"
-    type="text/javascript"
-  ></script>
 </html>
