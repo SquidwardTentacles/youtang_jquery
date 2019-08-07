@@ -49,7 +49,7 @@
 
       <div class="imgBack">
         <div class="absolute-book flexbox">
-          <div class=" flexbox j-center">
+          <div class=" flexbox j-center" id="imgBackTitle">
             <h2>全部视频模板</h2>
             <p>- 轻松制作精彩视频 -</p>
           </div>
@@ -57,11 +57,23 @@
       </div>
       <div class="nav-father">
         <div class="navtap width">
-          <ul class="flexbox between" id="screenlist"></ul>
+          <ul class="flexbox between" id="screenlist">
+            <li>全部</li>
+            <li>潮流时尚</li>
+            <li>婚礼爱情</li>
+            <li>商业宣传</li>
+            <li>家庭相册</li>
+            <li>生日祝福</li>
+            <li>节日问候</li>
+            <li>旅行时光</li>
+            <li>晚会典礼</li>
+            <li>毕业留念</li>
+            <li>通用</li>
+          </ul>
         </div>
       </div>
 
-      <div class="width choose">
+      <div class="width choose flexbox between">
         <ul class="flexbox j-start">
           <li class="title">内容：</li>
           <li>
@@ -146,6 +158,28 @@
             </div>
           </li>
         </ul>
+        <ul class="rightUlbox">
+          <li>
+            <div class="dropdown">
+              <button
+                class="btn btn-default dropdown-toggle"
+                type="button"
+                id="dropdownMenu1"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="true"
+              >
+                全部
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">16×9</a></li>
+                <li><a href="#">9×16</a></li>
+                <li><a href="#">1×1</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
       </div>
 
       <div class="width content-box">
@@ -175,47 +209,115 @@
       </div>
 
       <div class="footerBox">
-        <ul class="width flexbox between">
-          <li>
-            <p>关于我们</p>
-            <p>联络我们</p>
-          </li>
-          <li>
-            <p>隐私</p>
-            <p>条款</p>
-          </li>
-          <li class="checkUs">
-            <div class="content">
-              <p>关注我们</p>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </li>
-          <li>
-            <p>选择语言</p>
-            <div class="dropup">
-              <button
-                class="btn btn-default dropdown-toggle"
-                type="button"
-                id="dropdownMenu2"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Dropup
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
+        <div class="width">
+          <ul class="width flexbox between">
+            <li>
+              <p>关于我们</p>
+              <p>联络我们</p>
+            </li>
+            <li>
+              <p>隐私</p>
+              <p>条款</p>
+            </li>
+            <li class="checkUs">
+              <div class="content">
+                <p>关注我们</p>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </li>
+            <li>
+              <p class="chooseMessage">选择语言</p>
+              <div class="flexbox between inputBoxClick">
+                <input
+                  class="inputBoxChoose"
+                  type="button"
+                  id="dropdownMenu2"
+                  value="请选择语言"
+                />
+                <span class="topIcon"></span>
+              </div>
+              <div class="dropupBox flexbox between" id="droupTopbox">
+                <ul id="dropUl">
+                  <p class="closeIcon" id="closeIcon">×</p>
+                  <li class="us">
+                    <!-- href="https://lightmv.com/" -->
+                    <a>English</a>
+                  </li>
+                  <li class="fr">
+                    <!-- href="https://lightmv.com/fr" -->
+                    <a>Français</a>
+                  </li>
+                  <li class="de">
+                    <!-- href="https://lightmv.com/de" -->
+                    <a>Deutsch</a>
+                  </li>
+                  <li class="it">
+                    <!-- href="https://lightmv.com/it" -->
+                    <a>Italiano</a>
+                  </li>
+                  <li class="se">
+                    <!-- href="https://lightmv.com/se" -->
+                    <a>Svenska</a>
+                  </li>
+                  <li class="nl">
+                    <!-- href="https://lightmv.com/nl" -->
+                    <a>Nederlands</a>
+                  </li>
+                  <li class="es">
+                    <!-- href="https://lightmv.com/es" -->
+                    <a>Español</a>
+                  </li>
+                  <li class="fi">
+                    <!-- href="https://lightmv.com/fi" -->
+                    <a>Suomi</a>
+                  </li>
+                  <li class="no">
+                    <!-- href="https://lightmv.com/no" -->
+                    <a>Norsk</a>
+                  </li>
+                  <li class="dk">
+                    <!-- href="https://lightmv.com/dk" -->
+                    <a>Dansk</a>
+                  </li>
+                  <li class="tr">
+                    <!-- href="https://lightmv.com/tr" -->
+                    <a>Türkçe</a>
+                  </li>
+                  <li class="pl">
+                    <!-- href="https://lightmv.com/pl" -->
+                    <a>Polski</a>
+                  </li>
+                  <li class="jp">
+                    <!-- href="https://lightmv.com/jp" -->
+                    <a>日本語</a>
+                  </li>
+                  <li class="tw">
+                    <!-- href="https://lightmv.com/tw" -->
+                    <a>繁體中文</a>
+                  </li>
+                  <li class="cn">
+                    <!-- href="https://lightmv.com/zh" -->
+                    <a>简体中文</a>
+                  </li>
+                  <li class="hu">
+                    <!-- href="https://lightmv.com/hu" -->
+                    <a>Magyar</a>
+                  </li>
+                  <li class="cz">
+                    <!-- href="https://lightmv.com/cz" -->
+                    <a>Čeština</a>
+                  </li>
+                  <li class="pt">
+                    <!-- href="https://lightmv.com/pt" -->
+                    <a>Português</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <!-- <div class="masker">

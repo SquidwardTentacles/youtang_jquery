@@ -1,24 +1,6 @@
 $(document).ready(function() {
-  // 循环生成导航栏
-  let navtopData = [
-    { title: '全部' },
-    { title: '潮流时尚' },
-    { title: '婚礼爱情' },
-    { title: '商业宣传' },
-    { title: '家庭相册' },
-    { title: '生日祝福' },
-    { title: '节日问候' },
-    { title: '旅行时光' },
-    { title: '晚会典礼' },
-    { title: '毕业留恋' },
-    { title: '通用' }
-  ];
-  let option = '';
-  for (let i = 0; i < navtopData.length; i++) {
-    option += `<li>${navtopData[i].title}</li>`;
-  }
-  $('#screenlist').append(option);
-
+  // 设置axios默认的请求地址
+  axios.defaults.baseURL = 'https://lightmvapi.aoscdn.com';
   // 主界面的事件
   // 发送请求
   let backData = [];
@@ -26,7 +8,7 @@ $(document).ready(function() {
   let optionElement = '';
   let getData = i => {
     axios
-      .get(`https://lightmvapi.aoscdn.com/api/themes?language=zh&&page=${i}`)
+      .get(`/api/themes?language=zh&&page=${i}`)
       .then(res => {
         if (res.data.status === '1') {
           backData = res.data.data.list;
@@ -36,7 +18,6 @@ $(document).ready(function() {
           // };
           // const html = template('list_temp2', data);
           // $('#contentBoxList').html(html);
-
           if (i <= 1) {
             backData.forEach(function(element, index) {
               optionElement += `<li>
@@ -100,7 +81,11 @@ $(document).ready(function() {
     i = i++;
     getData(i);
   }
-
+  // 菜单栏筛选的点击事件
+  $('#screenlist li').click(function(e) {
+    let string = e.target.innerHTML.slice(0, 2) + '视频模板';
+    $('#imgBackTitle h2').html(string);
+  });
   // 页面滚动事件
   let handleScroll = function() {
     //变量scrollTop是滚动条滚动时，距离顶部的距离
@@ -128,60 +113,59 @@ $(document).ready(function() {
       mouseEvent();
     }
   };
-  // 暂时注释
+  // 暂时注释 注册页面滚动事件
   // window.addEventListener('scroll', handleScroll, true);
-
+  // 将产品列表的鼠标事件封装 每次发送请求时都调用一次 给新添加的元素注册事件
   let mouseEvent = function() {
     // 内容的鼠标移入移除事件
     $(document).ready(function() {
-      $('#contentBoxList>li').mouseenter(function() {
+      $('#contentBoxList .show-box').mouseenter(function() {
         $(this)
-          .children('.outer-box')
-          .children('.show-box')
           .children('.img-box')
           .children('img')
           .css('display', 'none');
         $(this)
-          .children('.outer-box')
-          .children('.show-box')
           .children('.img-box')
           .children('video')
           .css('display', 'block');
         $(this)
-          .children('.outer-box')
-          .children('.show-box')
           .children('.title-box')
           .css('display', 'none');
         $(this)
-          .children('.outer-box')
-          .children('.show-box')
           .children('.title-box.use')
           .css('display', 'block');
       });
-      $('#contentBoxList>li').mouseleave(function() {
+      $('#contentBoxList .show-box').mouseleave(function() {
         $(this)
-          .children('.outer-box')
-          .children('.show-box')
           .children('.img-box')
           .children('img')
           .css('display', 'block');
         $(this)
-          .children('.outer-box')
-          .children('.show-box')
           .children('.img-box')
           .children('video')
           .css('display', 'none');
         $(this)
-          .children('.outer-box')
-          .children('.show-box')
           .children('.title-box')
           .css('display', 'block');
         $(this)
-          .children('.outer-box')
-          .children('.show-box')
           .children('.title-box.use')
           .css('display', 'none');
       });
     });
   };
+
+  // 选择语言 语言的点击事件 设置内容
+  $('#dropUl li').click(function(e) {
+    // $('#dropdownMenu2').value = e.target.innerHTML;
+    $('#dropdownMenu2')[0].value = e.target.innerHTML;
+    $('#droupTopbox').css('display', 'none');
+  });
+  $('.inputBoxClick').click(function() {
+    $('#droupTopbox').css('display', 'block');
+  });
+  // 关闭按钮点击事件
+  $('#closeIcon').click(function() {
+    // 关闭选择语言弹出框
+    $('#droupTopbox').css('display', 'none');
+  });
 });
