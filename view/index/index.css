@@ -66,25 +66,88 @@
   border-color: #52a7ff;
   color: #52a7ff;
 }
-.nav .choose ul {
-  margin-top: 10px;
+.nav .choose {
+  margin: 10px auto;
 }
-.nav .choose ul li {
+.nav .choose .title {
   height: 30px;
   display: flex;
   align-items: center;
+  width: 25%;
 }
-.nav .choose ul li:nth-child(even) {
+.nav .choose li .lerftTitle {
+  height: 100%;
+  line-height: 30px;
+  min-width: 50px;
+}
+.nav .choose li .rightBox {
+  height: 100%;
+  margin-left: 10px;
+  box-sizing: border-box;
+  line-height: 30px;
+  position: relative;
+  text-align: center;
+  background: #f4f5f9;
+  min-width: 80px;
+  margin-left: 20px;
+  border: solid 1px #e8e8e7;
+}
+.outerAllBox {
+  background: none;
+  padding-bottom: 20px;
+}
+.nav .choose li .rightBox .hideMenu {
+  position: absolute;
+  top: 35px;
+  z-index: 100;
+  left: -10px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1100;
+  min-width: 120px;
+  background: #fff;
+  border-radius: 5px;
+  line-height: 30px;
+
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+  text-align: left;
+  display: none;
+}
+.nav .choose li .rightBox .hideMenu li a {
+  display: block;
+  width: 80%;
+  text-align: left;
+  color: #000;
+  padding: 3px;
+  padding-left: 20px;
+
+  text-decoration: none;
+}
+.nav .choose li .rightBox .hideMenu li a:hover {
+  color: #478afb;
+}
+.nav .choose li .rightBox .hideMenu li.active {
+  background: rgba(71, 138, 251, 0.1);
+}
+.nav .choose li .rightBox .hideMenu li.active a {
+  color: #478afb;
+}
+.nav .choose li .rightBox p {
+  margin: 0;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
 }
-.nav .choose ul li.title {
-  padding-left: 20px;
+.nav .choose .leftUlbox {
+  width: 60%;
+  padding-left: 40px;
+  box-sizing: border-box;
 }
-.nav .choose ul li .dropdown .btn {
-  min-width: 85px;
-  margin-left: 10px;
-  margin-right: 20px;
-  border-radius: 0;
+.nav .choose .rightUlbox {
+  width: 20%;
+}
+.nav .choose .rightUlbox li {
+  width: 150px;
 }
 /* 主体内容 */
 .content-box ul li {
@@ -98,6 +161,57 @@
 .content-box ul li .outer-box {
   width: 90%;
   position: relative;
+}
+.content-box ul li .outer-box .free.hidden {
+  display: none;
+}
+.content-box ul li .outer-box .free {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  color: #fff;
+  text-align: center;
+  width: auto;
+  height: 32px;
+  padding: 0 20px;
+  text-transform: uppercase;
+  display: flex;
+  -webkit-box-pack: center;
+  box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+  line-height: 32px;
+  background: #ff72b4;
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  -webkit-filter: drop-shadow(0 2px 2px rgba(51, 51, 51, 0.35));
+  -moz-filter: drop-shadow(0 2px 2px rgba(51, 51, 51, 0.35));
+  -ms-filter: drop-shadow(0 2px 2px rgba(51, 51, 51, 0.35));
+  filter: drop-shadow(0 2px 2px rgba(51, 51, 51, 0.35));
+}
+.content-box ul li .outer-box .free::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 43px;
+  opacity: 0;
+  background: url('../../static/images/leftfree.png.webp') center center
+    no-repeat;
+}
+.content-box ul li .outer-box .free::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -12px;
+  width: 12px;
+  height: 32px;
+  background: url('../../static/images/rightfree.png') center center/100% auto
+    no-repeat;
 }
 .content-box ul li .outer-box .hd-mark {
   position: absolute;

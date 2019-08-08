@@ -3,12 +3,46 @@ $(document).ready(function() {
   axios.defaults.baseURL = 'https://lightmvapi.aoscdn.com';
   // 主界面的事件
   // 发送请求
+  // 主界面内容数组
   let backData = [];
+  // 分页页数
   let pageData = 0;
+  // 主要内容的元素
   let optionElement = '';
-  let getData = i => {
+  // 发送请求携带的参数
+  let requestData = {
+    // 默认0 全部 1仅图片  2仅视频  3图片和视频
+    theme_resource_type: 0,
+    // 默认 0全部    1查询免费  2查询仅收费
+    charge_type: 0,
+    // 默认0 全部 1 flexible  2 fixed
+    composition_type: 0,
+    //theme_resolution 不传查询全部  可选 16x9 9x16 1x1
+    /*
+      排序类型 created_at  按创建时间
+      task_num    按使用量
+      orderby     后台权重 默认
+    */
+    order_field: 'orderby'
+  };
+  let getData = (i, requestObj, clearElement) => {
+    let reqData = '';
+    console.log(requestObj);
+
+    if (requestObj) {
+      // 如果传递过来了参数 则拼接参数-
+      reqData = `theme_resource_type=${
+        requestObj.theme_resource_type
+      }&charge_type=${requestObj.charge_type}&composition_type=${
+        requestObj.composition_type
+      }&order_field=${requestObj.order_field}`;
+      // 如果对象中有尺寸字段则拼接尺寸 0也不会拼接
+      if (requestObj.theme_resolution) {
+        reqData += `&theme_resolution=${requestObj.theme_resolution}`;
+      }
+    }
     axios
-      .get(`/api/themes?language=zh&&page=${i}`)
+      .get(`/api/themes?language=zh&page=${i}&per_page=16&${reqData}`)
       .then(res => {
         if (res.data.status === '1') {
           backData = res.data.data.list;
@@ -18,17 +52,22 @@ $(document).ready(function() {
           // };
           // const html = template('list_temp2', data);
           // $('#contentBoxList').html(html);
+          console.log(i);
+          let freeIcon = `<div class="free">免费</div>`;
           if (i <= 1) {
             backData.forEach(function(element, index) {
               optionElement += `<li>
               <div class="outer-box">
+            ${element.is_free == 0 ? '' : freeIcon}
               <span class="hd-mark">HD</span>
                 <div class="show-box">
                   <div class="img-box">
                     <img src="${element.cover_thumb_url}" alt="" />
-                    <video autoplay="autoplay" muted="muted" src="${
-                      element.low_video_url
-                    }"></video>
+                    <video autoplay="autoplay" preload="none" data-id='${
+                      element.theme_id
+                    }' muted="false" loop="loop" data-id="1124" poster="${
+                element.cover_thumb_url
+              }" src="${element.low_video_url}"></video>
                   </div>
                   <div class="title-box">
                     <span>${element.title}</span>
@@ -41,7 +80,10 @@ $(document).ready(function() {
               </div>
             </li>`;
             });
+            // 如果需要先清空之前的数据在进行赋值 下拉菜单的点击事件需要先清空
+            if (clearElement) $('#contentBoxList').empty();
             $('#contentBoxList').append(optionElement);
+            optionElement = '';
           } else {
             backData.forEach(function(element, index) {
               optionElement = `<li>
@@ -76,15 +118,78 @@ $(document).ready(function() {
         console.log(err);
       });
   };
-  // 进入页面默认调用两次请求获取数据
-  for (let i = 0; i < 2; i++) {
-    i = i++;
-    getData(i);
-  }
+  getData(1);
   // 菜单栏筛选的点击事件
-  $('#screenlist li').click(function(e) {
+  $('#screenlist li').on('click', function(e) {
     let string = e.target.innerHTML.slice(0, 2) + '视频模板';
     $('#imgBackTitle h2').html(string);
+  });
+  // 内容显示的筛选点击事件
+  let elementClass = '';
+  $('#select-choose_click p').on('mouseenter', function() {
+    // class 名称被绑定到对应的data数据中 在鼠标移入时 为变量赋值并记录 以便于在鼠标移除时控制相关影藏
+    elementClass = $(this).data('show');
+    $(`.hideMenu.${elementClass}`).css('display', 'block');
+  });
+  $('#select-choose_click p').on('click', function() {
+    // class 名称被绑定到对应的data数据中 在鼠标移入时 为变量赋值并记录 以便于在鼠标移除时控制相关影藏
+    elementClass = $(this).data('show');
+    $(`.hideMenu.${elementClass}`).css('display', 'none');
+  });
+  // 列表标题 全部 外面的大盒子的鼠标移除 下拉菜单影藏
+  $('.outerAllBox').on('mouseleave', function() {
+    $(`.hideMenu.${elementClass}`).css('display', 'none');
+  });
+  // 下拉菜单盒子鼠标移除 盒子影藏
+  $('.rightBox .hideMenu').on('mouseleave', function() {
+    $(`.hideMenu.${elementClass}`).css('display', 'none');
+  });
+  $('.rightBox .hideMenu').on('mouseenter', function() {
+    $(`.hideMenu.${elementClass}`).css('display', 'block');
+  });
+
+  // 选择菜单a标签的点击事件
+  $('.rightBox .hideMenu li a').on('click', function(e) {
+    // 点击后设置对应的p标签的内容
+    $(this)
+      .parent('li')
+      .parent('ul')
+      .siblings('div')
+      .children('#placeTitle')
+      .html(e.target.innerHTML);
+    // 为当前点击的li标签设置类名
+    $('.hideMenu li').removeClass('active');
+    $(this)
+      .parent('li')
+      .addClass('active');
+    // 声明一个对象来保相关内容
+    let typeObj = {};
+    // 内容的点击事件
+    typeObj.theme_resource_type = $(this).data('theme_resource_type')
+      ? $(this).data('theme_resource_type')
+      : 0;
+    // 权限的点击事件
+    typeObj.charge_type = $(this).data('charge_type')
+      ? $(this).data('charge_type')
+      : 0;
+    // 类型
+    typeObj.composition_type = $(this).data('composition_type')
+      ? $(this).data('composition_type')
+      : 0;
+    // 尺寸
+    typeObj.theme_resolution = $(this).data('theme_resolution')
+      ? $(this).data('theme_resolution')
+      : 0;
+    // 排序方式
+    typeObj.order_field = $(this).data('order_field')
+      ? $(this).data('order_field')
+      : 0;
+
+    // 点击后关闭菜单栏
+    $(`.hideMenu.${elementClass}`).css('display', 'none');
+    //
+    // 发送请求 并且携带参数 发送请求前 先清空ul下已有元素 第三个参数为1 清空 0或者不传则不清空
+    getData(1, typeObj, 1);
   });
   // 页面滚动事件
   let handleScroll = function() {
@@ -117,54 +222,53 @@ $(document).ready(function() {
   // window.addEventListener('scroll', handleScroll, true);
   // 将产品列表的鼠标事件封装 每次发送请求时都调用一次 给新添加的元素注册事件
   let mouseEvent = function() {
-    // 内容的鼠标移入移除事件
-    $(document).ready(function() {
-      $('#contentBoxList .show-box').mouseenter(function() {
-        $(this)
-          .children('.img-box')
-          .children('img')
-          .css('display', 'none');
-        $(this)
-          .children('.img-box')
-          .children('video')
-          .css('display', 'block');
-        $(this)
-          .children('.title-box')
-          .css('display', 'none');
-        $(this)
-          .children('.title-box.use')
-          .css('display', 'block');
-      });
-      $('#contentBoxList .show-box').mouseleave(function() {
-        $(this)
-          .children('.img-box')
-          .children('img')
-          .css('display', 'block');
-        $(this)
-          .children('.img-box')
-          .children('video')
-          .css('display', 'none');
-        $(this)
-          .children('.title-box')
-          .css('display', 'block');
-        $(this)
-          .children('.title-box.use')
-          .css('display', 'none');
-      });
+    $('#contentBoxList li').on('mouseenter', function() {
+      $(this)
+        .find('.free')
+        .fadeOut('slow');
+      $(this)
+        .find('img')
+        .css('display', 'none');
+      $(this)
+        .find('video')
+        .css('display', 'block');
+      $(this)
+        .find('.title-box')
+        .css('display', 'none');
+      $(this)
+        .find('.title-box.use')
+        .css('display', 'block');
+    });
+    $('#contentBoxList li').on('mouseleave', function() {
+      $(this)
+        .find('.free')
+        .fadeIn('slow');
+      $(this)
+        .find('img')
+        .css('display', 'block');
+      $(this)
+        .find('video')
+        .css('display', 'none');
+      $(this)
+        .find('.title-box')
+        .css('display', 'block');
+      $(this)
+        .find('.title-box.use')
+        .css('display', 'none');
     });
   };
 
   // 选择语言 语言的点击事件 设置内容
-  $('#dropUl li').click(function(e) {
+  $('#dropUl li').on('click', function(e) {
     // $('#dropdownMenu2').value = e.target.innerHTML;
     $('#dropdownMenu2')[0].value = e.target.innerHTML;
     $('#droupTopbox').css('display', 'none');
   });
-  $('.inputBoxClick').click(function() {
+  $('.inputBoxClick').on('click', function() {
     $('#droupTopbox').css('display', 'block');
   });
   // 关闭按钮点击事件
-  $('#closeIcon').click(function() {
+  $('#closeIcon').on('click', function() {
     // 关闭选择语言弹出框
     $('#droupTopbox').css('display', 'none');
   });

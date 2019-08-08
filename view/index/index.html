@@ -74,112 +74,77 @@
       </div>
 
       <div class="width choose flexbox between">
-        <ul class="flexbox j-start">
-          <li class="title">内容：</li>
-          <li>
-            <div class="dropdown">
-              <button
-                class="btn btn-default dropdown-toggle"
-                type="button"
-                id="dropdownMenu1"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="true"
-              >
-                全部
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">纯图片</a></li>
-                <li><a href="#">纯视频</a></li>
-                <li><a href="#">两者皆有</a></li>
+        <div class="flexbox j-start leftUlbox">
+          <li class="title flexbox j-start" id="select-choose_click">
+            <div class="lerftTitle">内容：</div>
+            <div class="rightBox">
+              <div class="outerAllBox">
+                <p data-show="content" id="placeTitle">全部</p>
+              </div>
+              <ul class="hideMenu content">
+                <li><a href="#" data-theme_resource_type="0">全部</a></li>
+                <li><a href="#" data-theme_resource_type="1">纯图片</a></li>
+                <li><a href="#" data-theme_resource_type="2">纯视频</a></li>
+                <li><a href="#" data-theme_resource_type="3">两者皆有</a></li>
               </ul>
             </div>
           </li>
-          <li class="title">权限：</li>
-          <li>
-            <div class="dropdown">
-              <button
-                class="btn btn-default dropdown-toggle"
-                type="button"
-                id="dropdownMenu1"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="true"
-              >
-                全部
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">免费</a></li>
-                <li><a href="#">会员</a></li>
+          <li class="title flexbox j-start" id="select-choose_click">
+            <div class="lerftTitle">权限：</div>
+            <div class="rightBox">
+              <div class="outerAllBox">
+                <p data-show="power" id="placeTitle">全部</p>
+              </div>
+              <ul class="hideMenu power">
+                <li><a href="#" data-charge_type="0">全部</a></li>
+                <li><a href="#" data-charge_type="1">免费</a></li>
+                <li><a href="#" data-charge_type="2">会员</a></li>
               </ul>
             </div>
           </li>
-          <li class="title">类型：</li>
-          <li>
-            <div class="dropdown">
-              <button
-                class="btn btn-default dropdown-toggle"
-                type="button"
-                id="dropdownMenu1"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="true"
-              >
-                全部
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">自由模板</a></li>
-                <li><a href="#">固定模板</a></li>
+          <li class="title flexbox j-start" id="select-choose_click">
+            <div class="lerftTitle">类型：</div>
+            <div class="rightBox">
+              <div class="outerAllBox">
+                <p data-show="category" id="placeTitle">全部</p>
+              </div>
+              <ul class="hideMenu category">
+                <li><a href="#" data-composition_type="0">全部</a></li>
+                <li><a href="#" data-composition_type="1">自由模板</a></li>
+                <li><a href="#" data-composition_type="2">固定模板</a></li>
               </ul>
             </div>
           </li>
-          <li class="title">比例：</li>
-          <li>
-            <div class="dropdown">
-              <button
-                class="btn btn-default dropdown-toggle"
-                type="button"
-                id="dropdownMenu1"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="true"
-              >
-                全部
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">16×9</a></li>
-                <li><a href="#">9×16</a></li>
-                <li><a href="#">1×1</a></li>
+          <li class="title flexbox j-start" id="select-choose_click">
+            <div class="lerftTitle">比例：</div>
+            <div class="rightBox">
+              <div class="outerAllBox">
+                <p data-show="size" id="placeTitle">全部</p>
+              </div>
+              <ul class="hideMenu size">
+                <li><a href="#" data-theme_resolution="0">全部</a></li>
+                <li><a href="#" data-theme_resolution="16×9">16×9</a></li>
+                <li><a href="#" data-theme_resolution="9×16">9×16</a></li>
+                <li><a href="#" data-theme_resolution="1×1">1×1</a></li>
               </ul>
             </div>
           </li>
-        </ul>
-        <ul class="rightUlbox">
-          <li>
-            <div class="dropdown">
-              <button
-                class="btn btn-default dropdown-toggle"
-                type="button"
-                id="dropdownMenu1"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="true"
-              >
-                全部
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">16×9</a></li>
-                <li><a href="#">9×16</a></li>
-                <li><a href="#">1×1</a></li>
+        </div>
+        <div class="rightUlbox flexbox j-end">
+          <li class="title flexbox j-start" id="select-choose_click">
+            <div class="lerftTitle">排序：</div>
+            <div class="rightBox">
+              <div class="outerAllBox">
+                <p data-show="sort" id="placeTitle">默认</p>
+              </div>
+              <ul class="hideMenu sort">
+                <li><a href="#" data-order_field="orderby">默认</a></li>
+                <li><a href="#" data-order_field="task_num">最热</a></li>
+                <li><a href="#" data-order_field="created_at">最新</a></li>
               </ul>
             </div>
           </li>
-        </ul>
+        </div>
       </div>
 
       <div class="width content-box">
