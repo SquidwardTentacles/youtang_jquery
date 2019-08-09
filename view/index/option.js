@@ -27,8 +27,6 @@ $(document).ready(function() {
   };
   let getData = (i, requestObj, clearElement) => {
     let reqData = '';
-    console.log(requestObj);
-
     if (requestObj) {
       // 如果传递过来了参数 则拼接参数-
       reqData = `theme_resource_type=${
@@ -56,6 +54,10 @@ $(document).ready(function() {
           let freeIcon = `<div class="free">免费</div>`;
           if (i <= 1) {
             backData.forEach(function(element, index) {
+              let videoObj = JSON.stringify({
+                title: element.title,
+                video_url: element.video_url
+              });
               optionElement += `<li>
               <div class="outer-box">
             ${element.is_free == 0 ? '' : freeIcon}
@@ -63,9 +65,7 @@ $(document).ready(function() {
                 <div class="show-box">
                   <div class="img-box">
                     <img src="${element.cover_thumb_url}" alt="" />
-                    <video autoplay="autoplay" preload="none" data-id='${
-                      element.theme_id
-                    }' muted="false" loop="loop" data-id="1124" poster="${
+                    <video autoplay="autoplay" id="low_video" preload="none" data-dataobj='${videoObj}' muted="false" loop="loop" poster="${
                 element.cover_thumb_url
               }" src="${element.low_video_url}"></video>
                   </div>
@@ -124,6 +124,14 @@ $(document).ready(function() {
     let string = e.target.innerHTML.slice(0, 2) + '视频模板';
     $('#imgBackTitle h2').html(string);
   });
+
+  // 视频点击放大
+  $(document).on('click', '#low_video', function() {
+    let objstr = $(this).data('dataobj');
+    $('#droupVideo').prop('src', objstr.video_url);
+    $('#droupTopbox').css('display', 'block');
+  });
+
   // 内容显示的筛选点击事件
   let elementClass = '';
   $('#select-choose_click p').on('mouseenter', function() {
@@ -189,6 +197,7 @@ $(document).ready(function() {
     $(`.hideMenu.${elementClass}`).css('display', 'none');
     //
     // 发送请求 并且携带参数 发送请求前 先清空ul下已有元素 第三个参数为1 清空 0或者不传则不清空
+    e.stopPropagation();
     getData(1, typeObj, 1);
   });
   // 页面滚动事件
@@ -258,12 +267,12 @@ $(document).ready(function() {
     });
   };
 
-  // 选择语言 语言的点击事件 设置内容
-  $('#dropUl li').on('click', function(e) {
-    // $('#dropdownMenu2').value = e.target.innerHTML;
-    $('#dropdownMenu2')[0].value = e.target.innerHTML;
-    $('#droupTopbox').css('display', 'none');
-  });
+  // 选择语言 语言的点击事件 设置内容 弹出式遮罩框
+  // $('#dropUl li').on('click', function(e) {
+  //   // $('#dropdownMenu2').value = e.target.innerHTML;
+  //   $('#dropdownMenu2')[0].value = e.target.innerHTML;
+  //   $('#droupTopbox').css('display', 'none');
+  // });
   $('.inputBoxClick').on('click', function() {
     $('#droupTopbox').css('display', 'block');
   });
@@ -271,5 +280,8 @@ $(document).ready(function() {
   $('#closeIcon').on('click', function() {
     // 关闭选择语言弹出框
     $('#droupTopbox').css('display', 'none');
+  });
+  $('#droupTopbox').on('click', function() {
+    $(this).css('display', 'none');
   });
 });

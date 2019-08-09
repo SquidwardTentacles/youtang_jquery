@@ -69,18 +69,18 @@
 .nav .choose {
   margin: 10px auto;
 }
-.nav .choose .title {
+.nav .title {
   height: 30px;
   display: flex;
   align-items: center;
   width: 25%;
 }
-.nav .choose li .lerftTitle {
+.nav li .lerftTitle {
   height: 100%;
   line-height: 30px;
   min-width: 50px;
 }
-.nav .choose li .rightBox {
+.nav li .rightBox {
   height: 100%;
   margin-left: 10px;
   box-sizing: border-box;
@@ -96,7 +96,7 @@
   background: none;
   padding-bottom: 20px;
 }
-.nav .choose li .rightBox .hideMenu {
+.nav li .rightBox .hideMenu {
   position: absolute;
   top: 35px;
   z-index: 100;
@@ -113,7 +113,7 @@
   text-align: left;
   display: none;
 }
-.nav .choose li .rightBox .hideMenu li a {
+.nav li .rightBox .hideMenu li a {
   display: block;
   width: 80%;
   text-align: left;
@@ -123,30 +123,30 @@
 
   text-decoration: none;
 }
-.nav .choose li .rightBox .hideMenu li a:hover {
+.nav li .rightBox .hideMenu li a:hover {
   color: #478afb;
 }
-.nav .choose li .rightBox .hideMenu li.active {
+.nav li .rightBox .hideMenu li.active {
   background: rgba(71, 138, 251, 0.1);
 }
-.nav .choose li .rightBox .hideMenu li.active a {
+.nav li .rightBox .hideMenu li.active a {
   color: #478afb;
 }
-.nav .choose li .rightBox p {
+.nav li .rightBox p {
   margin: 0;
   width: 100%;
   height: 100%;
   cursor: pointer;
 }
-.nav .choose .leftUlbox {
+.nav .leftUlbox {
   width: 60%;
   padding-left: 40px;
   box-sizing: border-box;
 }
-.nav .choose .rightUlbox {
+.nav .rightUlbox {
   width: 20%;
 }
-.nav .choose .rightUlbox li {
+.nav .rightUlbox li {
   width: 150px;
 }
 /* 主体内容 */
@@ -169,7 +169,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 99;
+  z-index: 10;
   color: #fff;
   text-align: center;
   width: auto;
@@ -313,7 +313,7 @@ img {
   width: 20px;
   height: 20px;
 }
-.footerBox ul li #droupTopbox .closeIcon {
+#droupTopbox .closeIcon {
   color: #000;
   position: absolute;
   top: 0px;
@@ -323,16 +323,17 @@ img {
   cursor: pointer;
   padding: 10px;
 }
-.footerBox ul li .dropupBox {
+.dropupBox.flexbox {
   display: none;
   position: fixed;
+  z-index: 1000000;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.5);
 }
-.footerBox ul li #dropUl {
+#dropUl {
   border-radius: 5px;
   background-color: #fff;
   margin: 0 auto;
@@ -344,14 +345,13 @@ img {
   justify-content: flex-start;
   flex-wrap: wrap;
   padding: 20px;
-  position: relative;
 }
-.footerBox ul li #dropUl li {
+#dropUl li {
   width: 25%;
   cursor: pointer;
   margin: 10px 0;
 }
-.footerBox ul li #dropUl li a {
+#dropUl li a {
   color: #000;
   display: block;
   width: 100%;
@@ -368,4 +368,34 @@ img {
 }
 .footerBox ul li .chooseMessage {
   text-align: left;
+}
+
+.dropupBox .video-box {
+  width: 900px;
+  height: 390px;
+  background-color: #fff;
+  border-radius: 6px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+.dropupBox .video-box video {
+  width: 100%;
+  height: 100%;
+}
+.dropupBox .video-box .left-video-box {
+  width: 65%;
+  height: 100%;
+  padding: 25px 36px;
+}
+.dropupBox .video-box .right-content {
+  flex: 1;
+}
+.dropupBox .outer-video-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }

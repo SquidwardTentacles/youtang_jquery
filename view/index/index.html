@@ -203,99 +203,123 @@
                 />
                 <span class="topIcon"></span>
               </div>
-              <div class="dropupBox flexbox between" id="droupTopbox">
-                <ul id="dropUl">
-                  <p class="closeIcon" id="closeIcon">×</p>
-                  <li class="us">
-                    <!-- href="https://lightmv.com/" -->
-                    <a>English</a>
-                  </li>
-                  <li class="fr">
-                    <!-- href="https://lightmv.com/fr" -->
-                    <a>Français</a>
-                  </li>
-                  <li class="de">
-                    <!-- href="https://lightmv.com/de" -->
-                    <a>Deutsch</a>
-                  </li>
-                  <li class="it">
-                    <!-- href="https://lightmv.com/it" -->
-                    <a>Italiano</a>
-                  </li>
-                  <li class="se">
-                    <!-- href="https://lightmv.com/se" -->
-                    <a>Svenska</a>
-                  </li>
-                  <li class="nl">
-                    <!-- href="https://lightmv.com/nl" -->
-                    <a>Nederlands</a>
-                  </li>
-                  <li class="es">
-                    <!-- href="https://lightmv.com/es" -->
-                    <a>Español</a>
-                  </li>
-                  <li class="fi">
-                    <!-- href="https://lightmv.com/fi" -->
-                    <a>Suomi</a>
-                  </li>
-                  <li class="no">
-                    <!-- href="https://lightmv.com/no" -->
-                    <a>Norsk</a>
-                  </li>
-                  <li class="dk">
-                    <!-- href="https://lightmv.com/dk" -->
-                    <a>Dansk</a>
-                  </li>
-                  <li class="tr">
-                    <!-- href="https://lightmv.com/tr" -->
-                    <a>Türkçe</a>
-                  </li>
-                  <li class="pl">
-                    <!-- href="https://lightmv.com/pl" -->
-                    <a>Polski</a>
-                  </li>
-                  <li class="jp">
-                    <!-- href="https://lightmv.com/jp" -->
-                    <a>日本語</a>
-                  </li>
-                  <li class="tw">
-                    <!-- href="https://lightmv.com/tw" -->
-                    <a>繁體中文</a>
-                  </li>
-                  <li class="cn">
-                    <!-- href="https://lightmv.com/zh" -->
-                    <a>简体中文</a>
-                  </li>
-                  <li class="hu">
-                    <!-- href="https://lightmv.com/hu" -->
-                    <a>Magyar</a>
-                  </li>
-                  <li class="cz">
-                    <!-- href="https://lightmv.com/cz" -->
-                    <a>Čeština</a>
-                  </li>
-                  <li class="pt">
-                    <!-- href="https://lightmv.com/pt" -->
-                    <a>Português</a>
-                  </li>
-                </ul>
-              </div>
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <!-- <div class="masker">
-      <div class="inmasker">
-        <p class="title">提示</p>
-        <div class="content">
-          <p>提示文本</p>
-        </div>
-        <div class="btnbox">
-          <div class="reback">确认</div>
-          <div class="cancel">取消</div>
+    <!-- 弹出式遮罩框 -->
+    <div class="dropupBox flexbox between" id="droupTopbox">
+      <ul id="dropUl">
+        <p class="closeIcon" id="closeIcon">×</p>
+        <li class="us">
+          <!-- href="https://lightmv.com/" -->
+          <a>English</a>
+        </li>
+        <li class="fr">
+          <!-- href="https://lightmv.com/fr" -->
+          <a>Fran?ais</a>
+        </li>
+        <li class="de">
+          <!-- href="https://lightmv.com/de" -->
+          <a>Deutsch</a>
+        </li>
+        <li class="it">
+          <!-- href="https://lightmv.com/it" -->
+          <a>Italiano</a>
+        </li>
+        <li class="se">
+          <!-- href="https://lightmv.com/se" -->
+          <a>Svenska</a>
+        </li>
+        <li class="nl">
+          <!-- href="https://lightmv.com/nl" -->
+          <a>Nederlands</a>
+        </li>
+        <li class="es">
+          <!-- href="https://lightmv.com/es" -->
+          <a>Espa?ol</a>
+        </li>
+        <li class="fi">
+          <!-- href="https://lightmv.com/fi" -->
+          <a>Suomi</a>
+        </li>
+        <li class="no">
+          <!-- href="https://lightmv.com/no" -->
+          <a>Norsk</a>
+        </li>
+        <li class="dk">
+          <!-- href="https://lightmv.com/dk" -->
+          <a>Dansk</a>
+        </li>
+        <li class="tr">
+          <!-- href="https://lightmv.com/tr" -->
+          <a>Türk?e</a>
+        </li>
+        <li class="pl">
+          <!-- href="https://lightmv.com/pl" -->
+          <a>Polski</a>
+        </li>
+        <li class="jp">
+          <!-- href="https://lightmv.com/jp" -->
+          <a>日本語</a>
+        </li>
+        <li class="tw">
+          <!-- href="https://lightmv.com/tw" -->
+          <a>繁體中文</a>
+        </li>
+        <li class="cn">
+          <!-- href="https://lightmv.com/zh" -->
+          <a>简体中文</a>
+        </li>
+        <li class="hu">
+          <!-- href="https://lightmv.com/hu" -->
+          <a>Magyar</a>
+        </li>
+        <li class="cz">
+          <!-- href="https://lightmv.com/cz" -->
+          <a>?e?tina</a>
+        </li>
+        <li class="pt">
+          <!-- href="https://lightmv.com/pt" -->
+          <a>Português</a>
+        </li>
+      </ul>
+
+      <div class="outer-video-box flexbox" id="videoBoxClickId">
+        <div class="video-box">
+          <div class="left-video-box flexbox">
+            <video
+              autoplay=""
+              poster=""
+              controls="controls"
+              controlslist="nodownload"
+              src=""
+              id="droupVideo"
+            ></video>
+          </div>
+          <div class="right-content">
+            <div class="title-box"></div>
+            <div class="time">时长不限</div>
+            <div class="write">支持照片/视频/文本</div>
+            <div class="sie">
+              <li class="title flexbox j-start" id="select-choose_click">
+                <div class="lerftTitle">排序：</div>
+                <div class="rightBox">
+                  <div class="outerAllBox">
+                    <p data-show="sort" id="placeTitle">默认</p>
+                  </div>
+                  <ul class="hideMenu sort">
+                    <li><a href="#" data-order_field="orderby">默认</a></li>
+                    <li><a href="#" data-order_field="task_num">最热</a></li>
+                    <li><a href="#" data-order_field="created_at">最新</a></li>
+                  </ul>
+                </div>
+              </li>
+            </div>
+          </div>
         </div>
       </div>
-    </div> -->
+    </div>
   </body>
 </html>
