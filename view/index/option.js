@@ -128,8 +128,12 @@ $(document).ready(function() {
   // 视频点击放大
   $(document).on('click', '#low_video', function() {
     let objstr = $(this).data('dataobj');
+    // 赋值视频地址
     $('#droupVideo').prop('src', objstr.video_url);
+    // 弹出框的显示
     $('#droupTopbox').css('display', 'block');
+    // 弹出框内的视频显示
+    $('.outer-video-box').css('display','block')
   });
 
   // 内容显示的筛选点击事件
@@ -275,13 +279,23 @@ $(document).ready(function() {
   // });
   $('.inputBoxClick').on('click', function() {
     $('#droupTopbox').css('display', 'block');
+    // 多语言选择框
+    $('#dropUl').css('display', 'block');
   });
   // 关闭按钮点击事件
   $('#closeIcon').on('click', function() {
     // 关闭选择语言弹出框
     $('#droupTopbox').css('display', 'none');
+    $('#dropUl').css('display', 'none');
   });
+  // 弹出框大盒子的点击事件
   $('#droupTopbox').on('click', function() {
     $(this).css('display', 'none');
+    // 关闭弹出框的同时清空视频地址
+    $('#droupVideo').prop('src', '');
+    // 弹出框内的视频的隐藏
+    $('.outer-video-box').css('display','none')
+    // 弹出框内语言栏的隐藏
+    $('#dropUl').css('display', 'none');
   });
 });
