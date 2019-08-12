@@ -25,9 +25,11 @@ $(document).ready(function() {
     */
     order_field: 'orderby'
   };
+  // i 分页 requestObj请求携带的参数  clearElement是否清空后再赋值0 不清空 1 清空
   let getData = (i, requestObj, clearElement) => {
     let reqData = '';
-    if (requestObj) {
+    // 参数来源于下拉菜单
+    if (requestObj && requestObj.type == 1) {
       // 如果传递过来了参数 则拼接参数-
       reqData = `theme_resource_type=${
         requestObj.theme_resource_type
@@ -38,6 +40,9 @@ $(document).ready(function() {
       if (requestObj.theme_resolution) {
         reqData += `&theme_resolution=${requestObj.theme_resolution}`;
       }
+      // 参数来源于菜单栏
+    } else if (requestObj && requestObj.type == 0) {
+      reqData = `tag_brief_name=${requestObj.tag_brief_name}`;
     }
     axios
       .get(`/api/themes?language=zh&page=${i}&per_page=16&${reqData}`)
@@ -110,6 +115,8 @@ $(document).ready(function() {
             });
           }
           mouseEvent();
+          // 请求回来后显示页尾
+          $('.footerBox').css('display', 'block');
         } else {
           this.$message.error('请求失败');
         }
@@ -121,8 +128,15 @@ $(document).ready(function() {
   getData(1);
   // 菜单栏筛选的点击事件
   $('#screenlist li').on('click', function(e) {
+    // h2主题文本提示内容
+    let reqobj = {};
+    if ($(this).data('tag_brief_name')) {
+      reqobj.tag_brief_name = $(this).data('tag_brief_name');
+      reqobj.type = 0;
+    }
     let string = e.target.innerHTML.slice(0, 2) + '视频模板';
     $('#imgBackTitle h2').html(string);
+    getData(1, reqobj, 1);
   });
 
   // 视频点击放大
@@ -130,13 +144,15 @@ $(document).ready(function() {
     let objstr = $(this).data('dataobj');
     // 赋值视频地址
     $('#droupVideo').prop('src', objstr.video_url);
+    // 赋值标题
+    $('#video_title').html(objstr.title);
     // 弹出框的显示
     $('#droupTopbox').css('display', 'block');
     // 弹出框内的视频显示
-    $('.outer-video-box').css('display','block')
+    $('.outer-video-box').css('display', 'block');
   });
 
-  // 内容显示的筛选点击事件
+  //下拉菜单 内容显示的筛选点击事件
   let elementClass = '';
   $('#select-choose_click p').on('mouseenter', function() {
     // class 名称被绑定到对应的data数据中 在鼠标移入时 为变量赋值并记录 以便于在鼠标移除时控制相关影藏
@@ -196,12 +212,13 @@ $(document).ready(function() {
     typeObj.order_field = $(this).data('order_field')
       ? $(this).data('order_field')
       : 0;
-
+    // type参数用于判断参数是从下拉菜单（1）传递的还是从模板筛选菜单栏传递的（0）
+    typeObj.type = 1;
     // 点击后关闭菜单栏
     $(`.hideMenu.${elementClass}`).css('display', 'none');
-    //
-    // 发送请求 并且携带参数 发送请求前 先清空ul下已有元素 第三个参数为1 清空 0或者不传则不清空
+    //阻止事件冒泡
     e.stopPropagation();
+    // 发送请求 并且携带参数 发送请求前 先清空ul下已有元素 第三个参数为1 清空 0或者不传则不清空
     getData(1, typeObj, 1);
   });
   // 页面滚动事件
@@ -272,11 +289,11 @@ $(document).ready(function() {
   };
 
   // 选择语言 语言的点击事件 设置内容 弹出式遮罩框
-  // $('#dropUl li').on('click', function(e) {
-  //   // $('#dropdownMenu2').value = e.target.innerHTML;
-  //   $('#dropdownMenu2')[0].value = e.target.innerHTML;
-  //   $('#droupTopbox').css('display', 'none');
-  // });
+  $('#dropUl li').on('click', function(e) {
+    // $('#dropdownMenu2').value = e.target.innerHTML;
+    $('#dropdownMenu2')[0].value = e.target.innerHTML;
+    $('#droupTopbox').css('display', 'none');
+  });
   $('.inputBoxClick').on('click', function() {
     $('#droupTopbox').css('display', 'block');
     // 多语言选择框
@@ -287,15 +304,20 @@ $(document).ready(function() {
     // 关闭选择语言弹出框
     $('#droupTopbox').css('display', 'none');
     $('#dropUl').css('display', 'none');
-  });
-  // 弹出框大盒子的点击事件
-  $('#droupTopbox').on('click', function() {
-    $(this).css('display', 'none');
     // 关闭弹出框的同时清空视频地址
     $('#droupVideo').prop('src', '');
     // 弹出框内的视频的隐藏
-    $('.outer-video-box').css('display','none')
-    // 弹出框内语言栏的隐藏
-    $('#dropUl').css('display', 'none');
+    $('.outer-video-box').css('display', 'none');
   });
+  // 弹出框大盒子的点击事件
+  // $('#droupTopbox').on('click', function(e) {
+  //   e.stopPropagation();
+  //   $(this).css('display', 'none');
+  //   // 关闭弹出框的同时清空视频地址
+  //   $('#droupVideo').prop('src', '');
+  //   // 弹出框内的视频的隐藏
+  //   $('.outer-video-box').css('display', 'none');
+  //   // 弹出框内语言栏的隐藏
+  //   $('#dropUl').css('display', 'none');
+  // });
 });

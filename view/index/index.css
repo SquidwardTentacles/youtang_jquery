@@ -57,6 +57,10 @@
   margin: 0 10px;
   padding: 0 15px;
   border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+.nav .nav-father .navtap ul {
+  flex-wrap: wrap;
 }
 .nav .nav-father .navtap ul li.active {
   border-color: #52a7ff;
@@ -66,37 +70,37 @@
   border-color: #52a7ff;
   color: #52a7ff;
 }
+/* 下拉菜单 */
 .nav .choose {
   margin: 10px auto;
 }
-.nav .title {
+.select-title {
   height: 30px;
   display: flex;
   align-items: center;
   width: 25%;
 }
-.nav li .lerftTitle {
+.selectbox li .lerftTitle {
   height: 100%;
   line-height: 30px;
   min-width: 50px;
 }
-.nav li .rightBox {
+.selectbox .rightBox {
   height: 100%;
   margin-left: 10px;
   box-sizing: border-box;
   line-height: 30px;
   position: relative;
   text-align: center;
-  background: #f4f5f9;
+  height: 30px;
   min-width: 80px;
   margin-left: 20px;
-  border: solid 1px #e8e8e7;
 }
 .outerAllBox {
   background: none;
   padding-bottom: 20px;
 }
-.nav li .rightBox .hideMenu {
+.selectbox .rightBox .hideMenu {
   position: absolute;
   top: 35px;
   z-index: 100;
@@ -113,7 +117,7 @@
   text-align: left;
   display: none;
 }
-.nav li .rightBox .hideMenu li a {
+.selectbox .rightBox .hideMenu li a {
   display: block;
   width: 80%;
   text-align: left;
@@ -123,30 +127,32 @@
 
   text-decoration: none;
 }
-.nav li .rightBox .hideMenu li a:hover {
+.selectbox .rightBox .hideMenu li a:hover {
   color: #478afb;
 }
-.nav li .rightBox .hideMenu li.active {
+.selectbox .rightBox .hideMenu li.active {
   background: rgba(71, 138, 251, 0.1);
 }
-.nav li .rightBox .hideMenu li.active a {
+.selectbox .rightBox .hideMenu li.active a {
   color: #478afb;
 }
-.nav li .rightBox p {
+.selectbox .rightBox p {
   margin: 0;
   width: 100%;
   height: 100%;
   cursor: pointer;
+  background: #f4f5f9;
+  border: solid 1px #e8e8e7;
 }
-.nav .leftUlbox {
+.selectbox .leftUlbox {
   width: 60%;
   padding-left: 40px;
   box-sizing: border-box;
 }
-.nav .rightUlbox {
+.selectbox .rightUlbox {
   width: 20%;
 }
-.nav .rightUlbox li {
+.selectbox .rightUlbox li {
   width: 150px;
 }
 /* 主体内容 */
@@ -259,6 +265,7 @@ img {
   text-align: center;
 }
 .footerBox {
+  display: none;
   padding: 50px 0;
   width: 100%;
   margin-top: 20px;
@@ -334,7 +341,7 @@ img {
   background: rgba(0, 0, 0, 0.5);
 }
 #dropUl {
-  display: none ;
+  display: none;
   border-radius: 5px;
   background-color: #fff;
   margin: 0 auto;
@@ -348,7 +355,7 @@ img {
   padding: 20px;
 }
 #dropUl .lanuageInbox {
-  flex-wrap: wrap ;
+  flex-wrap: wrap;
 }
 #dropUl li {
   width: 25%;
@@ -382,8 +389,9 @@ img {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   z-index: 1000;
+  padding: 25px 36px;
 }
 .dropupBox .video-box video {
   width: 100%;
@@ -392,14 +400,58 @@ img {
 .dropupBox .video-box .left-video-box {
   width: 65%;
   height: 100%;
-  padding: 25px 36px;
 }
 .dropupBox .video-box .right-content {
   flex: 1;
+  height: 100%;
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+.dropupBox .video-box .right-content .title-box {
+  font-weight: 700;
+  color: #000;
+}
+.dropupBox .video-box .right-content .iconbox {
+  padding-left: 30px;
+  height: 25px;
+  color: #666;
+  margin-top: 15px;
+  line-height: 25px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+.dropupBox .video-box .right-content .iconbox.time {
+  background: url('../../static/images/time.svg') left center no-repeat;
+  background-size: 24px 24px;
+}
+.dropupBox .video-box .right-content .iconbox.write {
+  background: url('../../static/images/support.svg') left center no-repeat;
+  background-size: 24px 24px;
+}
+.dropupBox .video-box .right-content .lefticon {
+  width: 24px;
+  height: 24px;
+  background: url('../../static/images/ration-select.svg') center center
+    no-repeat;
+  background-size: 24px 24px;
 }
 .dropupBox .outer-video-box {
   width: 100%;
   height: 100%;
   position: relative;
-  display: none ;
+  display: none;
+}
+.select-drop-box {
+  background: none;
+  margin-top: 15px;
+}
+.select-drop-box .outerAllBox p {
+  padding: 0 10px;
+  border-radius: 5px;
+}
+.select-drop-box .hideMenu li {
+  white-space: nowrap;
+}
+.right-content-box {
+  flex: 1;
 }
