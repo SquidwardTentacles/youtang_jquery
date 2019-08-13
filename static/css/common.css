@@ -18,6 +18,9 @@
 .flexbox.j-center {
   justify-content: center;
 }
+.flexbox.a-start {
+  align-items: start;
+}
 a {
   text-decoration: none;
 }
@@ -37,7 +40,7 @@ li {
 }
 .width {
   max-width: 1400px;
-  min-width: 1200px;
+  min-width: 440px;
   margin: 0 auto;
 }
 .masker {

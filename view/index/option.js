@@ -1,6 +1,8 @@
 $(document).ready(function() {
   // 设置axios默认的请求地址
-  axios.defaults.baseURL = 'https://lightmvapi.aoscdn.com';
+  // axios.defaults.baseURL = 'https://lightmvapi.aoscdn.com';
+  let getBaseUrl = 'https://lightmvapi.aoscdn.com';
+  let saveBaseUrl = 'http://localhost:8090';
   // 主界面的事件
   // 发送请求
   // 主界面内容数组
@@ -25,8 +27,10 @@ $(document).ready(function() {
     */
     order_field: 'orderby'
   };
-  // i 分页 requestObj请求携带的参数  clearElement是否清空后再赋值0 不清空 1 清空
-  let getData = (i, requestObj, clearElement) => {
+  // i 分页 requestObj请求携带的参数  clearElement是否清空后再赋值0 不清空 1 清空 str 菜单栏点击的内容
+  let getData = (i, requestObj, clearElement, str) => {
+    console.log(str);
+
     let reqData = '';
     // 参数来源于下拉菜单
     if (requestObj && requestObj.type == 1) {
@@ -45,7 +49,9 @@ $(document).ready(function() {
       reqData = `tag_brief_name=${requestObj.tag_brief_name}`;
     }
     axios
-      .get(`/api/themes?language=zh&page=${i}&per_page=16&${reqData}`)
+      .get(
+        `${getBaseUrl}/api/themes?language=zh&page=${i}&per_page=16&${reqData}`
+      )
       .then(res => {
         if (res.data.status === '1') {
           backData = res.data.data.list;
@@ -113,10 +119,123 @@ $(document).ready(function() {
              </li>`;
               $('#contentBoxList').append(optionElement);
             });
+            // console.log('save');
+            // axios.post(`${saveBaseUrl}/saveData`, res.data.data);
           }
           mouseEvent();
           // 请求回来后显示页尾
           $('.footerBox').css('display', 'block');
+          // 如果是菜单栏的点击事件 则等待请求回来后再去更新h2标题
+          if (str) {
+            switch (str) {
+              case '全部视频模板':
+                $('#imgBackTitle').css(
+                  'background',
+                  "url('../../static/images/all.jpg') center center no-repeat"
+                );
+                $('#imgBackTitle')
+                  .find('P')
+                  .html('- 轻松制作精彩视频 -');
+                break;
+              case '潮流视频模板':
+                $('#imgBackTitle').css(
+                  'background',
+                  "url('../../static/images/fashion.jpg') center center no-repeat"
+                );
+                $('#imgBackTitle')
+                  .find('P')
+                  .html('- 用精彩视频展示你的光芒 -');
+                break;
+              case '婚礼视频模板':
+                $('#imgBackTitle').css(
+                  'background',
+                  "url('../../static/images/wedding.jpg') center center no-repeat"
+                );
+                $('#imgBackTitle')
+                  .find('P')
+                  .html('- 用高端浪漫的婚礼视频记录幸福时光 -');
+                break;
+              case '商业视频模板':
+                $('#imgBackTitle').css(
+                  'background',
+                  "url('../../static/images/business.jpg') center center no-repeat"
+                );
+                $('#imgBackTitle')
+                  .find('P')
+                  .html('- 制做高端大气的商业视频 -');
+                break;
+              case '家庭视频模板':
+                $('#imgBackTitle').css(
+                  'background',
+                  "url('../../static/images/family.jpg') center center no-repeat"
+                );
+                $('#imgBackTitle')
+                  .find('P')
+                  .html('- 为家人制做动人视频 -');
+                break;
+              case '生日视频模板':
+                $('#imgBackTitle').css(
+                  'background',
+                  "url('../../static/images/birthday.jpg') center center no-repeat"
+                );
+                $('#imgBackTitle')
+                  .find('P')
+                  .html('- 用视频给生日增添惊喜 -');
+                break;
+              case '节日视频模板':
+                $('#imgBackTitle').css(
+                  'background',
+                  "url('../../static/images/holiday.jpg') center center no-repeat"
+                );
+                $('#imgBackTitle')
+                  .find('P')
+                  .html('- 制作视频来记录每一个节日 -');
+                break;
+              case '旅游视频模板':
+                $('#imgBackTitle').css(
+                  'background',
+                  "url('../../static/images/travel.jpg') center center no-repeat"
+                );
+                $('#imgBackTitle')
+                  .find('P')
+                  .html('- 用炫酷视频记录每一次旅行 -');
+                break;
+              case '晚会典礼视频模板':
+                $('#imgBackTitle').css(
+                  'background',
+                  "url('../../static/images/ceremony.jpg') center center no-repeat"
+                );
+                $('#imgBackTitle')
+                  .find('P')
+                  .html('- 用令人印象深刻的视频点燃你的晚会 -');
+                break;
+              case '毕业视频模板':
+                $('#imgBackTitle').css(
+                  'background',
+                  "url('../../static/images/graduation.jpg') center center no-repeat"
+                );
+                $('#imgBackTitle')
+                  .find('P')
+                  .html('- 制作毕业视频，珍藏最美时光 -');
+                break;
+              case '通用视频模板':
+                $('#imgBackTitle').css(
+                  'background',
+                  "url('../../static/images/general.jpg') center center no-repeat"
+                );
+                $('#imgBackTitle')
+                  .find('P')
+                  .html('- 用独特的视频点亮你生活 -');
+                break;
+
+              default:
+                break;
+            }
+            $('#imgBackTitle')
+              .find('h2')
+              .html(str);
+          }
+          $('.free').css('display', 'block');
         } else {
           this.$message.error('请求失败');
         }
@@ -135,8 +254,13 @@ $(document).ready(function() {
       reqobj.type = 0;
     }
     let string = e.target.innerHTML.slice(0, 2) + '视频模板';
-    $('#imgBackTitle h2').html(string);
-    getData(1, reqobj, 1);
+
+    getData(1, reqobj, 1, string);
+    // 先将其兄弟元素移除active类名 然后在添加active类名
+    $(this)
+      .siblings()
+      .removeClass('active');
+    $(this).addClass('active');
   });
 
   // 视频点击放大
@@ -267,7 +391,7 @@ $(document).ready(function() {
         .css('display', 'none');
       $(this)
         .find('.title-box.use')
-        .css('display', 'block');
+        .css('display', 'flex');
     });
     $('#contentBoxList li').on('mouseleave', function() {
       $(this)
@@ -281,7 +405,7 @@ $(document).ready(function() {
         .css('display', 'none');
       $(this)
         .find('.title-box')
-        .css('display', 'block');
+        .css('display', 'flex');
       $(this)
         .find('.title-box.use')
         .css('display', 'none');
@@ -300,8 +424,9 @@ $(document).ready(function() {
     $('#dropUl').css('display', 'block');
   });
   // 关闭按钮点击事件
-  $('#closeIcon').on('click', function() {
+  $('#closeIcon,#closeIcon2').on('click', function() {
     // 关闭选择语言弹出框
+    console.log('close');
     $('#droupTopbox').css('display', 'none');
     $('#dropUl').css('display', 'none');
     // 关闭弹出框的同时清空视频地址

@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>youTang</title>
-    <link rel="shortcut icon" href="./favicon.png.webp" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="../../static/images/favicon.png.webp"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" type="text/css" href="index.css" />
     <link rel="stylesheet" href="../../static/css/common.css" type="text/css" />
     <script src="../../static/js/jquery.min.js"></script>
@@ -16,13 +20,13 @@
   </head>
   <body>
     <div class="nav">
-      <div class="topnav">
+      <div class="topnav width">
         <div class="inbox flexbox between">
           <div class="leftnav">
             <img src="../../static//images/logo-zh.svg" alt="" />
           </div>
           <div class="right-nav">
-            <ul class="flexbox f-end">
+            <ul class="flexbox j-start">
               <li>主页</li>
               <li>模板</li>
               <li>教程</li>
@@ -35,8 +39,8 @@
       </div>
 
       <div class="imgBack">
-        <div class="absolute-book flexbox">
-          <div class=" flexbox j-center" id="imgBackTitle">
+        <div class="absolute-book flexbox" id="imgBackTitle">
+          <div class=" flexbox j-center">
             <h2>全部视频模板</h2>
             <p>- 轻松制作精彩视频 -</p>
           </div>
@@ -44,7 +48,7 @@
       </div>
       <div class="nav-father">
         <div class="navtap width">
-          <ul class="flexbox between" id="screenlist">
+          <ul class="flexbox j-start" id="screenlist">
             <li data-tag_brief_name="">全部</li>
             <li data-tag_brief_name="fashion-video-templates">潮流时尚</li>
             <li data-tag_brief_name="wedding-video-templates">婚礼爱情</li>
@@ -60,7 +64,7 @@
         </div>
       </div>
 
-      <div class="width choose flexbox between selectbox">
+      <div class="width choose flexbox a-start between selectbox">
         <div class="flexbox j-start leftUlbox">
           <li class="select-title flexbox j-start" id="select-choose_click">
             <div class="lerftTitle">内容：</div>
@@ -135,7 +139,7 @@
       </div>
 
       <div class="width content-box">
-        <ul class=" flexbox j-start" id="contentBoxList">
+        <ul class=" flexbox between" id="contentBoxList">
           <!-- <script type="text/html" id="list_temp2">
             {{ each list }}
             <li>
@@ -245,7 +249,7 @@
       </div>
       <!-- 语言选择框 -->
       <ul id="dropUl" class="flexbox">
-        <p class="closeIcon" id="closeIcon">×</p>
+        <p class="closeIcon" id="closeIcon2">×</p>
         <div class="flexbox lanuageInbox j-start">
           <li class="us">
             <!-- href="https://lightmv.com/" -->

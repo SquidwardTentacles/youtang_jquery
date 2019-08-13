@@ -1,0 +1,257 @@
+/* 顶部导航栏 */
+.template-edit .topnav {
+  max-height: 65px;
+  border-bottom: solid 1px #edeef1;
+  width: 100%;
+}
+.template-edit .topinbox {
+  max-width: 97%;
+  margin: 0 auto;
+}
+/* logo */
+.template-edit .topnav .leftnav {
+  width: 140px;
+  height: 50px;
+  background: url('../../static/images/logo-zh.svg') center center no-repeat;
+  background-size: 115px auto;
+  min-height: 45px;
+}
+/* 中间文字 */
+.template-edit .topnav .mainContent {
+  margin: 0 auto;
+}
+.template-edit .topnav .mainContent li {
+  padding: 0 30px;
+  background: url('../../static/images/right.svg') center right/10px auto
+    no-repeat;
+  cursor: pointer;
+}
+.template-edit .topnav .mainContent li.active {
+  background: url('../../static/images/right_active.svg') center right/10px auto
+    no-repeat;
+  color: #5b93e7;
+}
+.template-edit .topnav .mainContent li:hover {
+  background: url('../../static/images/right_active.svg') center right/10px auto
+    no-repeat;
+  color: #5b93e7;
+}
+/* 右边用户信息 */
+.template-edit .rightUser .user-show-icon {
+  background: url('../../static/images/default-portrait.svg') center center/30px
+    auto no-repeat;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+}
+.template-edit .rightUser .outer-bigbox {
+  padding-left: 15px;
+  padding-bottom: 15px;
+  background: none;
+}
+.template-edit .rightUser {
+  position: relative;
+}
+/* 右边隐藏的用户信息样式 */
+.user-sesson-hiddenbox {
+  border-radius: 5px;
+  width: 200px;
+  background: #fff;
+  border-radius: 5px;
+  line-height: 30px;
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+  text-align: left;
+  position: absolute;
+  right: -13px;
+  top: 40px;
+  display: none;
+}
+.user-sesson-hiddenbox .rel-box {
+  position: relative;
+}
+.user-sesson-hiddenbox .top-icon {
+  /* width: 14px;
+  height: 10px; */
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 10px solid #fff;
+  top: -20px;
+  position: absolute;
+  left: 155.5px;
+}
+.user-sesson-hiddenbox .sesson-box {
+  border-bottom: 1px solid #f5f5f5;
+  padding-bottom: 10px;
+}
+.user-sesson-hiddenbox .sesson-box .user-icon {
+  background: url('../../static/images/default-portrait.svg') center center/30px
+    auto no-repeat;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  margin-right: 5px;
+}
+.user-sesson-hiddenbox li {
+  border-bottom: 1px solid #f5f5f5;
+  padding: 5px;
+  color: #478afb;
+}
+.user-sesson-hiddenbox li .icon .icon {
+  color: #478afb;
+  stroke: currentColor;
+  fill: none;
+  margin-right: 10px;
+}
+/* 主体内容 */
+.content-box {
+  background: #f7f8fa;
+  padding-top: 20px;
+}
+/* 左边信息栏 */
+.content-box .left-sesson-box {
+  background: #fff;
+  border: solid 1px #edeef1;
+  margin-right: 10px;
+  box-shadow: 0 -5px 10px rgba(162, 162, 162, 0.12);
+  padding: 15px;
+  box-sizing: border-box;
+  height: 100%;
+  width: 263px;
+}
+.content-box .left-sesson-box #video_title {
+  background: url('../../static/images/support.svg') right center/16px auto
+    no-repeat;
+  cursor: pointer;
+}
+.content-box .left-sesson-box #video_title:hover {
+  background: url('../../static/images/edit-hover.svg') right center/16px auto
+    no-repeat;
+  color: #5b93e7;
+}
+
+/* 影藏的输入框 */
+.content-box .input-hidden {
+  display: none;
+}
+.content-box .input-hidden .icon {
+  width: 24px;
+  color: #5b93e7;
+  cursor: pointer;
+  text-align: center;
+}
+.content-box .input-hidden input {
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+}
+.content-box .video-img {
+  width: 100%;
+  height: 128px;
+  margin-top: 20px;
+  background: url('../../static/images/video-img.jpg') center center/cover
+    no-repeat;
+}
+.content-box .show-box {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.content-box .show-box p.icon {
+  text-align: left;
+  background: url('../../static/images/theme-name.svg') center center/cover
+    no-repeat;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.content-box .show-box p.icon:hover {
+  background: url('../../static/images/theme-name-active.svg') center
+    center/cover no-repeat;
+}
+.content-box .video-other-box li p {
+  font-size: 16px;
+  color: #333;
+  line-height: 25px;
+  background: url('../../static/images/picture.svg') left center/20px no-repeat;
+  margin-top: 20px;
+  padding-left: 26px;
+  box-sizing: border-box;
+}
+.selectbox li .lerftTitle {
+  height: 100%;
+  line-height: 30px;
+  min-width: 50px;
+}
+.selectbox .rightBox {
+  height: 100%;
+  box-sizing: border-box;
+  line-height: 30px;
+  position: relative;
+  text-align: center;
+  height: 30px;
+  min-width: 80px;
+}
+.outerAllBox {
+  background: none;
+  padding-bottom: 20px;
+}
+.selectbox .rightBox .hideMenu {
+  position: absolute;
+  top: 35px;
+  z-index: 100;
+  left: -10px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1100;
+  min-width: 120px;
+  background: #fff;
+  border-radius: 5px;
+  line-height: 30px;
+
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+  text-align: left;
+  display: none;
+}
+.selectbox .rightBox .hideMenu li a {
+  display: block;
+  width: 80%;
+  text-align: left;
+  color: #000;
+  padding: 3px;
+  padding-left: 20px;
+
+  text-decoration: none;
+}
+.selectbox .rightBox .hideMenu li a:hover {
+  color: #478afb;
+}
+.selectbox .rightBox .hideMenu li.active {
+  background: rgba(71, 138, 251, 0.1);
+}
+.selectbox .rightBox .hideMenu li.active a {
+  color: #478afb;
+}
+.selectbox .rightBox p {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: #f4f5f9;
+  border: solid 1px #e8e8e7;
+}
+.selectbox .leftUlbox {
+  /* width: 90%; */
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  padding-left: 40px;
+  box-sizing: border-box;
+}
+.selectbox .rightUlbox {
+  width: 160px;
+  padding-left: 40px;
+}

@@ -1,15 +1,18 @@
 .nav .topnav {
-  height: 45px;
+  min-height: 45px;
   margin: 0 auto;
   position: fixed;
   z-index: 100;
   background-color: #fff;
   width: 100%;
   top: 0;
+  max-width: 100%;
+}
+.nav {
+  margin-top: 45px;
 }
 .nav .topnav .inbox {
-  margin: 0 auto;
-  width: 1200px;
+  /* flex-wrap: wrap; */
 }
 .nav .topnav .inbox .leftnav {
   width: 40%;
@@ -19,7 +22,11 @@
   width: 115px;
   height: 45px;
 }
+.nav .topnav .inbox .right-nav ul {
+  flex-wrap: wrap;
+}
 .nav .topnav .inbox .right-nav li {
+  margin-bottom: 10px;
   padding: 0 30px;
   border-right: 1px solid #ccc;
 }
@@ -30,8 +37,9 @@
   color: #fff;
   height: 235px;
   background: url('../../static/images/all.jpg') center center no-repeat;
-  width: 100%;
+  max-width: 100%;
   margin-top: 10px;
+  min-width: 440px;
 }
 .nav .imgBack .absolute-book div {
   flex-direction: column;
@@ -73,12 +81,14 @@
 /* 下拉菜单 */
 .nav .choose {
   margin: 10px auto;
+  flex-wrap: wrap;
 }
 .select-title {
   height: 30px;
   display: flex;
   align-items: center;
-  width: 25%;
+  width: 175px;
+  margin-bottom: 10px;
 }
 .selectbox li .lerftTitle {
   height: 100%;
@@ -87,14 +97,12 @@
 }
 .selectbox .rightBox {
   height: 100%;
-  margin-left: 10px;
   box-sizing: border-box;
   line-height: 30px;
   position: relative;
   text-align: center;
   height: 30px;
   min-width: 80px;
-  margin-left: 20px;
 }
 .outerAllBox {
   background: none;
@@ -145,33 +153,35 @@
   border: solid 1px #e8e8e7;
 }
 .selectbox .leftUlbox {
-  width: 60%;
+  /* width: 90%; */
+  box-sizing: border-box;
+  flex-wrap: wrap;
   padding-left: 40px;
   box-sizing: border-box;
 }
 .selectbox .rightUlbox {
-  width: 20%;
-}
-.selectbox .rightUlbox li {
-  width: 150px;
+  width: 160px;
+  padding-left: 40px;
 }
 /* 主体内容 */
 .content-box ul li {
-  width: 25%;
+  max-width: 25%;
   cursor: pointer;
   margin-top: 10px;
+  min-width: 190px;
 }
 .content-box ul {
   flex-wrap: wrap;
 }
 .content-box ul li .outer-box {
-  width: 90%;
+  width: 95%;
   position: relative;
 }
 .content-box ul li .outer-box .free.hidden {
   display: none;
 }
 .content-box ul li .outer-box .free {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -251,13 +261,12 @@ img {
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
-  height: 50px;
+  height: 40px;
   box-shadow: 0 2px 8px rgba(153, 153, 153, 0.3);
 }
 .content-box .outer-box .show-box .title-box.use {
-  display: inline-block;
+  justify-content: center;
   background: linear-gradient(to right, #689cf9, #f9bbdd);
-  line-height: 50px;
   color: #fff;
   min-width: 50%;
   font-size: 20px;
@@ -271,8 +280,8 @@ img {
   margin-top: 20px;
   background: #2a2626;
 }
-.footerBox .width {
-  width: 1200px;
+.footerBox ul {
+  flex-wrap: wrap;
 }
 .footerBox ul li {
   width: 25%;
@@ -410,6 +419,8 @@ img {
 .dropupBox .video-box .right-content .title-box {
   font-weight: 700;
   color: #000;
+  display: flex;
+  align-items: center;
 }
 .dropupBox .video-box .right-content .iconbox {
   padding-left: 30px;
