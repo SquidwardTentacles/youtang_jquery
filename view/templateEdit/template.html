@@ -208,35 +208,82 @@
               <p>4-100</p>
             </li>
             <li>预估时长：00：00</li>
-            <li>
-              <div class="select-drop-box flexbox j-start">
-                <span class="lefticon"></span>
-                <div class="selectbox right-content-box">
-                  <li class="title flexbox j-start" id="select-choose_click">
-                    <div class="rightBox">
-                      <div class="outerAllBox">
-                        <p data-show="video-hidden-box" id="placeTitle">
-                          16 : 9（横屏）
-                        </p>
-                      </div>
-                      <ul class="hideMenu video-hidden-box">
-                        <li>
-                          <a href="#">16 : 9（横屏）</a>
-                        </li>
-                        <li>
-                          <a href="#">9 : 16（竖屏）</a>
-                        </li>
-                        <li>
-                          <a href="#">1 : 1（正方形）</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
+            <li class="select-outer-box">
+              <div class="select-hidden-box" id="outer-hiddenbox">
+                <!-- 触发按钮 -->
+                <div class="select-box flexbox j-start">
+                  <span id="select-content">16:9（横屏）</span
+                  ><span class="bottom-icon"
+                    ><svg
+                      class="icon icon-down"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      is="icon"
+                      viewBox="0 0 12 12"
+                      width="12px"
+                      height="12px"
+                    >
+                      <polyline
+                        style="stroke-linecap:round;"
+                        points="1.5,3.3 6,8.3 10.5,3.3"
+                      ></polyline>
+                    </svg>
+                  </span>
+                </div>
+                <!-- 隐藏的内容 -->
+                <div class="hidden-box" id="select-hidden-box">
+                  <ul>
+                    <li class="active">16:9（横屏）</li>
+                    <li>1：1（正方形）</li>
+                    <li>9:16（竖屏）</li>
+                  </ul>
                 </div>
               </div>
             </li>
+            <div class="make"><p>制作高清视频（免费）</p></div>
           </div>
         </div>
+        <div class="right-make-box">
+          <div class="top-blank-box"></div>
+          <div class="sub-content flexbox between">
+            <div class="sub-logo">
+              <div>
+                <p class="top">默认</p>
+                <p class="bottom">02:21</p>
+              </div>
+            </div>
+            <div class="right-button flexbox j-end">
+              <div class="button" id="change-music">更改音乐</div>
+              <div class="button">音乐设置</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 遮罩框 -->
+    <div class="drop-box" id="drop-box-id">
+      <div class="rel-box">
+        <div class="change-music">
+          <div class="in-rel-box">
+          <p class="closeIcon" id="closeIcon">×</p>
+          <div class="title-box" id="drop-title-click">
+            <span class="active" data-showid="0">我的音乐</span>
+            <span  data-showid="1">推荐</span>
+          </div>
+          <div class="outer-music show" id="my-music">
+                <div class="update-music flexbox">
+                  <span class="add-icon">上传</span>
+                  <input type="file" id="upoload-file" >
+                </div>
+                <input type="button" value="上传" id="upJQuery" class="update-btn">
+          </div>
+          <div class="outer-music hidden" id="recommend">
+                <div class="music-box">
+                  <div class="check-icon active"></div>
+                </div>
+                <input type="button" value="上传" id="upJQuery" class="update-btn">
+           </div>
+          </div>
       </div>
     </div>
   </body>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="-227 350.9 140 140" style="enable-background:new -227 350.9 140 140;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{opacity:0.3;fill:url(#SVGID_2_);enable-background:new    ;}
+	.st2{fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.st3{fill:#FFFFFF;}
+</style>
+<title>musicCover</title>
+<g id="图层_2">
+	<g id="图层_1-2">
+		
+			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-227.45" y1="491.23" x2="-89.85" y2="353.63" gradientTransform="matrix(1 0 0 -1 0 841.67)">
+			<stop  offset="0" style="stop-color:#CDDCFF"/>
+			<stop  offset="1" style="stop-color:#FFE5F5"/>
+		</linearGradient>
+		<rect x="-227" y="350.9" class="st0" width="140" height="140"/>
+		
+			<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-28.6005" y1="296.5896" x2="-254.9504" y2="515.5195" gradientTransform="matrix(1 0 0 -1 0 841.67)">
+			<stop  offset="0" style="stop-color:#FFB6DE"/>
+			<stop  offset="0.16" style="stop-color:#FBB5DF"/>
+			<stop  offset="0.31" style="stop-color:#EFB3E1"/>
+			<stop  offset="0.47" style="stop-color:#DBB0E5"/>
+			<stop  offset="0.62" style="stop-color:#C0ACEB"/>
+			<stop  offset="0.78" style="stop-color:#9CA6F2"/>
+			<stop  offset="0.93" style="stop-color:#719FFA"/>
+			<stop  offset="1" style="stop-color:#599BFF"/>
+		</linearGradient>
+		<rect x="-227" y="350.9" class="st1" width="140" height="140"/>
+		<path class="st2" d="M-151.2,440.6v-53.7c0,0,15.8,15,20.1,19.9"/>
+		<circle class="st3" cx="-171" cy="439.3" r="5.2"/>
+		<ellipse class="st2" cx="-167" cy="440.6" rx="15.8" ry="14.3"/>
+	</g>
+</g>
+</svg>

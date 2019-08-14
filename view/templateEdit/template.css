@@ -1,3 +1,11 @@
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+.template-edit {
+  height: 100%;
+}
 /* 顶部导航栏 */
 .template-edit .topnav {
   max-height: 65px;
@@ -108,7 +116,11 @@
 /* 主体内容 */
 .content-box {
   background: #f7f8fa;
-  padding-top: 20px;
+  padding: 20px;
+  padding-left: 10px;
+  padding-bottom: 0;
+  height: 100%;
+  width: 98%;
 }
 /* 左边信息栏 */
 .content-box .left-sesson-box {
@@ -182,76 +194,313 @@
   padding-left: 26px;
   box-sizing: border-box;
 }
-.selectbox li .lerftTitle {
-  height: 100%;
-  line-height: 30px;
-  min-width: 50px;
-}
-.selectbox .rightBox {
-  height: 100%;
-  box-sizing: border-box;
-  line-height: 30px;
-  position: relative;
-  text-align: center;
+.content-box .video-other-box li {
   height: 30px;
-  min-width: 80px;
 }
-.outerAllBox {
-  background: none;
+
+/* 下拉框样式 */
+.select-outer-box {
+  background: url('../../static/images/ration-select.svg') left center/25px auto
+    no-repeat;
+  padding-left: 40px;
+  box-sizing: border-box;
+  margin: 10px 0;
+}
+.select-outer-box .select-box {
+  width: 100%;
+  background: #f4f5f9;
+  padding: 0 20px;
+  min-width: 80px;
+  border-radius: 5px;
+  border: solid 1px #e8e8e7;
+  text-align: left;
+  height: 30px;
+  box-sizing: border-box;
+}
+.select-hidden-box {
+  height: 30px;
+  position: relative;
   padding-bottom: 20px;
 }
-.selectbox .rightBox .hideMenu {
+.select-box .bottom-icon .icon {
+  stroke: currentColor;
+  fill: none;
+}
+.select-hidden-box .hidden-box {
   position: absolute;
-  top: 35px;
-  z-index: 100;
-  left: -10px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1100;
-  min-width: 120px;
+  top: 34px;
+  left: 50%;
+  transform: translateX(-50%);
   background: #fff;
   border-radius: 5px;
   line-height: 30px;
-
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
   text-align: left;
   display: none;
 }
-.selectbox .rightBox .hideMenu li a {
-  display: block;
-  width: 80%;
-  text-align: left;
-  color: #000;
-  padding: 3px;
-  padding-left: 20px;
-
-  text-decoration: none;
+.select-hidden-box .hidden-box li {
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 5px 15px;
 }
-.selectbox .rightBox .hideMenu li a:hover {
+.select-hidden-box .hidden-box li.active {
   color: #478afb;
-}
-.selectbox .rightBox .hideMenu li.active {
   background: rgba(71, 138, 251, 0.1);
 }
-.selectbox .rightBox .hideMenu li.active a {
-  color: #478afb;
+/* 按钮 */
+.left-sesson-box .make {
+  /* background-image: linear-gradient(to right, #689cf9, #f9bbdd); */
+
+  background-color: #799ef6;
+  padding: 0 20px;
+  border-radius: 20px;
+  margin-top: 25px;
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  line-height: 40px;
+  min-width: 180px;
 }
-.selectbox .rightBox p {
-  margin: 0;
+.left-sesson-box .make:hover {
+  background-image: none;
+  background-color: #497bf3;
+}
+/* 右边信息栏 */
+.right-make-box {
+  /* -webkit-box-flex: 1; */
+  box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  height: 100%;
+  border: solid 1px #edeef1;
+  margin-right: 10px;
+  background: #fff;
+  box-shadow: 0 -5px 10px rgba(162, 162, 162, 0.12);
+  overflow: hidden;
+}
+.right-make-box .top-blank-box {
+  padding: 0 20px;
+  line-height: 50px;
+  height: 50px;
+  border-bottom: solid 1px #edeef1;
+}
+
+.right-make-box .sub-content .sub-logo {
+  padding-left: 85px;
+  height: 70px;
+  background: url('../../static/images/normal-music.svg') 20px center/50px auto
+    no-repeat;
+  line-height: 24px;
+  padding-top: 2px;
+  float: left;
+  max-width: 60%;
+  -webkit-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1 0 auto;
+  flex: 1 0 auto;
+}
+.right-make-box .sub-content .sub-logo .top {
+  color: #333;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.right-make-box .sub-content .sub-logo .bottom {
+  font-size: 14px;
+  color: #999;
+  line-height: 18px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 400px;
+  overflow: hidden;
+}
+.right-make-box .sub-content .right-button div {
+  text-align: center;
+  border: solid 1px #5b93e7;
+  border-radius: 18px;
+  min-width: 130px;
+  color: #5b93e7;
+  font-size: 14px;
+  cursor: pointer;
+  line-height: 34px;
+  width: 130px;
+  margin-right: 20px;
+}
+.right-make-box .sub-content .right-button div:hover {
+  border-color: #fff;
+  color: #fff;
+  background-image: linear-gradient(to right, #689cf9, #f9bbdd);
+}
+/* 遮罩框 */
+.drop-box {
+  position: fixed;
   width: 100%;
   height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  display: none;
+}
+.drop-box .rel-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: none;
+}
+.drop-box .change-music {
+  width: 850px;
+  border-radius: 5px;
+  background-color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 580px;
+  padding-top: 40px;
+}
+.drop-box .in-rel-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.drop-box .in-rel-box .closeIcon {
+  position: absolute;
+  right: 20px;
+  top: -33px;
+  padding: 10px;
   cursor: pointer;
-  background: #f4f5f9;
-  border: solid 1px #e8e8e7;
+  font-weight: 700px;
+  font-size: 20px;
 }
-.selectbox .leftUlbox {
-  /* width: 90%; */
-  box-sizing: border-box;
-  flex-wrap: wrap;
-  padding-left: 40px;
-  box-sizing: border-box;
+.drop-box .change-music .title-box {
+  text-align: center;
+  margin-bottom: 20px;
 }
-.selectbox .rightUlbox {
-  width: 160px;
-  padding-left: 40px;
+.drop-box .change-music .title-box span:nth-child(1) {
+  margin-right: 10px;
+}
+.drop-box .change-music .title-box span {
+  position: relative;
+  display: inline-block;
+  color: #333;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}
+.drop-box .change-music .title-box span.active {
+  background-image: linear-gradient(
+    to right,
+    #4889ff,
+    #4889ff,
+    #ff9ad1,
+    #ff9ad1
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.drop-box .change-music .title-box span::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -7px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  z-index: -1;
+  background: #e4ecfd;
+  opacity: 0;
+}
+.drop-box .change-music .title-box span::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  right: -5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  z-index: -1;
+  background: #f6dbef;
+  opacity: 0;
+}
+.drop-box .change-music .title-box span.active::before,
+.drop-box .change-music .title-box span.active::after {
+  opacity: 1;
+}
+.drop-box .change-music .add-icon {
+  display: inline-block;
+  padding-top: 40px;
+  color: #999;
+  background: url('../../static/images/addmusic.svg') center top/34px auto
+    no-repeat;
+}
+.drop-box .change-music .update-music {
+  float: left;
+  width: 140px;
+  height: 140px;
+  background: #f6f6f6;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+.drop-box .change-music .outer-music.show {
+  display: block;
+}
+.drop-box .change-music .outer-music {
+  padding: 0 40px;
+  position: relative;
+  height: calc(100% - 40px);
+  display: none;
+}
+.drop-box .change-music .update-music input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 0;
+  opacity: 0;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.drop-box .change-music .update-btn {
+  border: none;
+  display: inline-block;
+  background-image: linear-gradient(to right, #689cf9, #f9bbdd);
+  line-height: 40px;
+  color: #fff;
+  padding: 0 20px;
+  min-width: 250px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 20px;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  outline: none;
+}
+.music-box {
+  width: 140px;
+  background: #f9bbdd url('../../static/images/music-cover.svg') center center
+    no-repeat;
+  height: 140px;
+  position: relative;
+  border: solid 1px transparent;
+  cursor: pointer;
+}
+.music-box .check-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.music-box .check-icon.active {
+  background: #5b93e7 url('../../static/images/check.svg') center center/12px
+    auto no-repeat;
+  border-color: transparent;
 }

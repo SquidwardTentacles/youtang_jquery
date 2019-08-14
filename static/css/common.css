@@ -35,6 +35,10 @@ li {
   margin-bottom: 0;
   list-style: none;
 }
+ul {
+  padding: 0;
+  margin: 0;
+}
 .nav ul {
   margin: 0;
 }

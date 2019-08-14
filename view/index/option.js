@@ -61,7 +61,6 @@ $(document).ready(function() {
           // };
           // const html = template('list_temp2', data);
           // $('#contentBoxList').html(html);
-          console.log(i);
           let freeIcon = `<div class="free">免费</div>`;
           if (i <= 1) {
             backData.forEach(function(element, index) {
@@ -426,7 +425,6 @@ $(document).ready(function() {
   // 关闭按钮点击事件
   $('#closeIcon,#closeIcon2').on('click', function() {
     // 关闭选择语言弹出框
-    console.log('close');
     $('#droupTopbox').css('display', 'none');
     $('#dropUl').css('display', 'none');
     // 关闭弹出框的同时清空视频地址
