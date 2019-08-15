@@ -83,10 +83,21 @@ $(document).ready(function() {
 
   // 更改音乐点击事件 显示遮罩层
   $('#change-music').on('click', function() {
-    $('#drop-box-id').show();
+    $('#drop-box-id,.change-music').show();
   });
   // 关闭遮罩层
-  $('#closeIcon').on('click', function() {
-    $('#drop-box-id').hide();
+  $('#closeIcon,#closeIcon2').on('click', function() {
+    $('#drop-box-id,.change-music,.setting-music').hide();
+  });
+  // 上传图片盒子鼠标事件 控制文字的显示 隐藏
+  $('#outer-addimg-box,#tips-text').on('mouseenter', function() {
+    $('#update-tips').show();
+  });
+  $('#outer-addimg-box,#tips-text').on('mouseleave', function() {
+    $('#update-tips').hide();
+  });
+  // 音乐设置点击事件
+  $('#music-setting-click').on('click', function() {
+    $('#drop-box-id,.setting-music').show();
   });
 });

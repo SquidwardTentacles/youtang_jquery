@@ -24,7 +24,7 @@
           <div class="leftnav"></div>
           <div class="mainContent flexbox" id="mincontent">
             <li>选择模板</li>
-            <li>编辑</li>
+            <li class="active">编辑</li>
             <li>制作</li>
           </div>
           <div class="rightUser">
@@ -240,21 +240,48 @@
                 </div>
               </div>
             </li>
-            <div class="make"><p>制作高清视频（免费）</p></div>
+            <div class="make-btn-click"><p>制作高清视频（免费）</p></div>
           </div>
         </div>
         <div class="right-make-box">
           <div class="top-blank-box"></div>
-          <div class="sub-content flexbox between">
-            <div class="sub-logo">
-              <div>
-                <p class="top">默认</p>
-                <p class="bottom">02:21</p>
+          <div class="sub-content flexbox">
+            <div class="logo-top-box flexbox">
+              <div class="sub-logo">
+                <div>
+                  <p class="top">默认</p>
+                  <p class="bottom">02:21</p>
+                </div>
+              </div>
+              <div class="right-button flexbox j-end">
+                <div class="button" id="change-music">更改音乐</div>
+                <div class="button" id="music-setting-click">音乐设置</div>
               </div>
             </div>
-            <div class="right-button flexbox j-end">
-              <div class="button" id="change-music">更改音乐</div>
-              <div class="button">音乐设置</div>
+            <div class="logo-center-box">
+              <div class="add-img">
+                <div class="default-title">
+                  <p>已添加照片数：<span>0</span></p>
+                </div>
+                <div class="add-img-box flexbox">
+                  <div class="update-outer" id="outer-addimg-box">
+                    <div class="hover-tips" id="update-tips">
+                      <div class="icon-rel-box">
+                        <div class="lanuage-icon">添加素材</div>
+                        <div class="tips-icon"></div>
+                      </div>
+                    </div>
+                    <div class="update-music flexbox">
+                      <span class="add-icon">上传</span>
+                      <input type="file" id="upoload-file" />
+                    </div>
+                  </div>
+                  <p class="tips-text" id="tips-text">拖拽或点击“+”上传图片</p>
+                </div>
+              </div>
+            </div>
+            <div class="logo-footer-box">
+              <div class="make-btn-click"><p>制作高清视频（免费）</p></div>
             </div>
           </div>
         </div>
@@ -263,27 +290,92 @@
     <!-- 遮罩框 -->
     <div class="drop-box" id="drop-box-id">
       <div class="rel-box">
+        <!-- 更改音乐弹窗 -->
         <div class="change-music">
           <div class="in-rel-box">
-          <p class="closeIcon" id="closeIcon">×</p>
-          <div class="title-box" id="drop-title-click">
-            <span class="active" data-showid="0">我的音乐</span>
-            <span  data-showid="1">推荐</span>
+            <p class="closeIcon" id="closeIcon">×</p>
+            <div class="title-box" id="drop-title-click">
+              <span class="active" data-showid="0">我的音乐</span>
+              <span data-showid="1">推荐</span>
+            </div>
+            <div class="outer-music show" id="my-music">
+              <div class="update-music flexbox">
+                <span class="add-icon">上传</span>
+                <input type="file" id="upoload-file" />
+              </div>
+              <input
+                type="button"
+                value="上传"
+                id="upJQuery"
+                class="update-btn"
+              />
+            </div>
+            <div class="outer-music hidden" id="recommend">
+              <div class="music-box">
+                <div class="check-icon active"></div>
+              </div>
+              <input
+                type="button"
+                value="上传"
+                id="upJQuery"
+                class="update-btn"
+              />
+            </div>
           </div>
-          <div class="outer-music show" id="my-music">
-                <div class="update-music flexbox">
-                  <span class="add-icon">上传</span>
-                  <input type="file" id="upoload-file" >
+        </div>
+
+        <!-- 音乐设置弹窗 -->
+        <div class="setting-music">
+          <div class="setting-rel-box">
+            <p class="closeIcon" id="closeIcon2">×</p>
+            <p class="box-title">音乐截取（默认）</p>
+            <div class="audio-box">
+              <audio src="../../static/music.mp3" controls="">
+                您的浏览器不支持 audio 标签。
+              </audio>
+              <div class="control-music flexbox">
+                <div class="control-music-btn"></div>
+                <div class="control-bar">
+                  <div
+                    class="control-bar-process"
+                    style="width: 100%; left: 0%;"
+                  ></div>
+                  <div class="control-btn left-control" style="left: 0%;">
+                    <span>00:00</span>
+                  </div>
+                  <div class="control-btn right-control" style="left: 100%;">
+                    <span>141</span>
+                  </div>
                 </div>
-                <input type="button" value="上传" id="upJQuery" class="update-btn">
-          </div>
-          <div class="outer-music hidden" id="recommend">
-                <div class="music-box">
-                  <div class="check-icon active"></div>
+                <div class="duration">02:21</div>
+              </div>
+            </div>
+            <div class="check">
+              <div class="checkbox flexbox j-end active" is="checkbox">
+                <div class="checkbox-icon">
+                  <svg
+                    class="icon icon-checkbox"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    is="icon"
+                    type="checkbox"
+                    viewBox="0 0 18 18"
+                    width="18px"
+                    height="18px"
+                  >
+                    <path
+                      style="stroke:none; fill:currentColor"
+                      d="M12.7,4.3C11,6.6,8.9,9.1,8.1,12c-0.9-1-1.9-2-2.9-2.8c-0.7-0.5-1.6,0.4-0.9,1c1.3,1,2.5,2.3,3.7,3.6c0.3,0.3,1,0.2,1.1-0.3C9.6,10.3,12,7.6,13.9,5C14.4,4.3,13.2,3.6,12.7,4.3"
+                    ></path>
+                  </svg>
                 </div>
-                <input type="button" value="上传" id="upJQuery" class="update-btn">
-           </div>
+                <div class="checkbox-label">
+                  淡入淡出
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
     </div>
   </body>

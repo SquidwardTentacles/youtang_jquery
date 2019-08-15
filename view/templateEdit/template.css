@@ -8,12 +8,13 @@ html {
 }
 /* 顶部导航栏 */
 .template-edit .topnav {
-  max-height: 65px;
+  height: 65px;
   border-bottom: solid 1px #edeef1;
   width: 100%;
 }
 .template-edit .topinbox {
   max-width: 97%;
+  height: 100%;
   margin: 0 auto;
 }
 /* logo */
@@ -30,6 +31,7 @@ html {
 }
 .template-edit .topnav .mainContent li {
   padding: 0 30px;
+  color: #666;
   background: url('../../static/images/right.svg') center right/10px auto
     no-repeat;
   cursor: pointer;
@@ -119,7 +121,7 @@ html {
   padding: 20px;
   padding-left: 10px;
   padding-bottom: 0;
-  height: 100%;
+  height: calc(100% - 80px);
   width: 98%;
 }
 /* 左边信息栏 */
@@ -248,7 +250,7 @@ html {
   background: rgba(71, 138, 251, 0.1);
 }
 /* 按钮 */
-.left-sesson-box .make {
+.make-btn-click {
   /* background-image: linear-gradient(to right, #689cf9, #f9bbdd); */
 
   background-color: #799ef6;
@@ -261,8 +263,10 @@ html {
   font-size: 14px;
   line-height: 40px;
   min-width: 180px;
+  max-width: 200px;
+  margin: 25px auto;
 }
-.left-sesson-box .make:hover {
+.make-btn-click:hover {
   background-image: none;
   background-color: #497bf3;
 }
@@ -278,6 +282,10 @@ html {
   background: #fff;
   box-shadow: 0 -5px 10px rgba(162, 162, 162, 0.12);
   overflow: hidden;
+  display: flex;
+  /* align-items: flex-start; */
+  justify-content: flex-start;
+  flex-direction: column;
 }
 .right-make-box .top-blank-box {
   padding: 0 20px;
@@ -285,7 +293,17 @@ html {
   height: 50px;
   border-bottom: solid 1px #edeef1;
 }
-
+.right-make-box .sub-content {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.right-make-box .logo-top-box {
+  width: 100%;
+  height: 70px;
+  border-bottom: solid 1px #edeef1;
+}
 .right-make-box .sub-content .sub-logo {
   padding-left: 85px;
   height: 70px;
@@ -348,6 +366,7 @@ html {
   background: none;
 }
 .drop-box .change-music {
+  display: none;
   width: 850px;
   border-radius: 5px;
   background-color: #fff;
@@ -363,7 +382,7 @@ html {
   width: 100%;
   height: 100%;
 }
-.drop-box .in-rel-box .closeIcon {
+.drop-box .closeIcon {
   position: absolute;
   right: 20px;
   top: -33px;
@@ -427,14 +446,14 @@ html {
 .drop-box .change-music .title-box span.active::after {
   opacity: 1;
 }
-.drop-box .change-music .add-icon {
+.update-music .add-icon {
   display: inline-block;
   padding-top: 40px;
   color: #999;
   background: url('../../static/images/addmusic.svg') center top/34px auto
     no-repeat;
 }
-.drop-box .change-music .update-music {
+.update-music {
   float: left;
   width: 140px;
   height: 140px;
@@ -443,16 +462,7 @@ html {
   align-items: center;
   justify-content: center;
 }
-.drop-box .change-music .outer-music.show {
-  display: block;
-}
-.drop-box .change-music .outer-music {
-  padding: 0 40px;
-  position: relative;
-  height: calc(100% - 40px);
-  display: none;
-}
-.drop-box .change-music .update-music input {
+.update-music input {
   position: absolute;
   top: 0;
   left: 0;
@@ -462,6 +472,15 @@ html {
   opacity: 0;
   z-index: 10;
   cursor: pointer;
+}
+.drop-box .change-music .outer-music.show {
+  display: block;
+}
+.drop-box .change-music .outer-music {
+  padding: 0 40px;
+  position: relative;
+  height: calc(100% - 40px);
+  display: none;
 }
 
 .drop-box .change-music .update-btn {
@@ -503,4 +522,207 @@ html {
   background: #5b93e7 url('../../static/images/check.svg') center center/12px
     auto no-repeat;
   border-color: transparent;
+}
+.right-make-box .logo-footer-box {
+  width: 100%;
+  height: 75px;
+  border-top: solid 1px #edeef1;
+  box-align: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 -10px 30px rgba(102, 102, 102, 0.1);
+}
+.right-make-box .logo-center-box {
+  flex: 1;
+  width: 100%;
+}
+.right-make-box .logo-center-box .add-img .default-title {
+  color: #999;
+  margin-bottom: 10px;
+}
+.right-make-box .logo-center-box .add-img {
+  padding: 15px 20px;
+}
+/* 拖拽或者点击上传图片 */
+.logo-center-box .add-img .add-img-box {
+  justify-content: flex-start;
+}
+.logo-center-box .add-img .add-img-box .update-outer {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 134px;
+  height: 124px;
+  border: solid 1px #eaeaea;
+  position: relative;
+  cursor: pointer;
+  padding: 6px 7px;
+  box-sizing: border-box;
+}
+.logo-center-box .add-img .add-img-box .update-outer .update-music {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+
+/* 鼠标的文字提示 */
+.hover-tips .lanuage-icon {
+  border-radius: 5px;
+  background: #fff;
+  z-index: 2000;
+  padding: 5px 10px;
+  /* display: none; */
+  font-size: 15px;
+  line-height: 22px;
+  white-space: nowrap;
+  max-width: 300px;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.2);
+}
+.hover-tips {
+  display: none;
+  position: absolute;
+  top: -46px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+}
+.hover-tips .tips-icon {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 10px solid #fff;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -10px;
+}
+.hover-tips .icon-rel-box {
+  position: relative;
+}
+
+.logo-center-box .add-img .add-img-box .tips-text {
+  margin-left: 10px;
+  cursor: pointer;
+}
+/* 音乐设置遮罩层 */
+.drop-box .rel-box .setting-music {
+  width: 780px;
+  height: 270px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.5);
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 36px;
+  padding-bottom: 0;
+  box-sizing: border-box;
+}
+.drop-box .rel-box .setting-music .box-title {
+  font-size: 18px;
+  color: #333;
+  text-align: left;
+  padding-bottom: 20px;
+  font-weight: bold;
+}
+.setting-music .setting-rel-box {
+  position: relative;
+}
+.setting-music .setting-rel-box audio {
+  width: 100%;
+  height: 20px;
+  display: none;
+}
+/* 音乐控制条 */
+.setting-music .control-music-btn {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background: url('../../static/images/contorls.svg') left center/30px auto
+    no-repeat;
+}
+.setting-music .control-bar .control-bar-process {
+  background-image: linear-gradient(to right, #4889ff, #ff9ad1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  height: 4px;
+}
+.control-btn.left-control {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(180, 180, 180, 0.46);
+  position: absolute;
+  background: #fff;
+  top: -8px;
+  cursor: pointer;
+}
+.control-music .left-control::before {
+  background: #5b93e7;
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  border-radius: 50%;
+  height: 8px;
+  margin: auto;
+}
+.control-music .control-btn span {
+  position: absolute;
+  left: -4px;
+  right: 0;
+  bottom: -30px;
+  font-size: 12px;
+  margin: auto;
+  display: none;
+}
+.control-music .control-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(180, 180, 180, 0.46);
+  position: absolute;
+  background: #fff;
+  top: -8px;
+  cursor: pointer;
+}
+.control-music .crop-music-win .right-control::before {
+  background: #eb82c7;
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  border-radius: 50%;
+  height: 8px;
+  margin: auto;
+}
+.control-bar {
+  height: 4px;
+  position: relative;
+  width: calc(100% - 100px);
+  background: #efeef3;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.control-music .duration {
+  margin-left: 16px;
+}
+
+.check .checkbox {
+  width: auto;
+}
+.check .checkbox-label {
+  margin-left: 10px;
 }
