@@ -15,7 +15,6 @@
     <script src="../../static/js/jquery.min.js"></script>
     <!-- axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./template.js"></script>
   </head>
   <body>
     <div class="template-edit">
@@ -330,16 +329,13 @@
             <p class="closeIcon" id="closeIcon2">×</p>
             <p class="box-title">音乐截取（默认）</p>
             <div class="audio-box">
-              <audio src="../../static/music.mp3" controls="">
+              <audio src="../../static/music.mp3" id="setting-music-id">
                 您的浏览器不支持 audio 标签。
               </audio>
               <div class="control-music flexbox">
                 <div class="control-music-btn"></div>
                 <div class="control-bar">
-                  <div
-                    class="control-bar-process"
-                    style="width: 100%; left: 0%;"
-                  ></div>
+                  <div class="control-bar-process" style="width: 100%"></div>
                   <div class="control-btn left-control" style="left: 0%;">
                     <span>00:00</span>
                   </div>
@@ -351,7 +347,7 @@
               </div>
             </div>
             <div class="check">
-              <div class="checkbox flexbox j-end active" is="checkbox">
+              <div class="checkbox flexbox j-end" id="checkbox-click">
                 <div class="checkbox-icon">
                   <svg
                     class="icon icon-checkbox"
@@ -360,8 +356,8 @@
                     is="icon"
                     type="checkbox"
                     viewBox="0 0 18 18"
-                    width="18px"
-                    height="18px"
+                    width="19px"
+                    height="19px"
                   >
                     <path
                       style="stroke:none; fill:currentColor"
@@ -374,9 +370,13 @@
                 </div>
               </div>
             </div>
+            <div class="bottom-btn-outer flexbox">
+              <div class="bottom-btn">确定</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </body>
+  <script src="./template.js"></script>
 </html>

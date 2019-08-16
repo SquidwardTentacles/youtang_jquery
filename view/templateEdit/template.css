@@ -643,11 +643,19 @@ html {
   background: url('../../static/images/contorls.svg') left center/30px auto
     no-repeat;
 }
+.setting-music .control-music-btn:hover {
+  background: url('../../static/images/play-active.svg') left center/30px auto
+    no-repeat;
+}
+.setting-music .control-music-btn.play {
+  background: url('../../static/images/stop-active.svg') left center/30px auto
+    no-repeat;
+}
 .setting-music .control-bar .control-bar-process {
   background-image: linear-gradient(to right, #4889ff, #ff9ad1);
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   height: 4px;
@@ -721,8 +729,47 @@ html {
 }
 
 .check .checkbox {
+  cursor: pointer;
+  margin-top: 10px;
   width: auto;
 }
 .check .checkbox-label {
   margin-left: 10px;
+}
+.check .checkbox-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  cursor: pointer;
+  text-align: center;
+  line-height: 20px;
+}
+.check .checkbox.active {
+  color: #478afb;
+}
+.check .checkbox:hover {
+  color: #478afb;
+}
+.checkbox.active .checkbox-icon {
+  background-color: #478afb;
+}
+.check .checkbox-icon .icon {
+  color: #fff;
+}
+.setting-rel-box .bottom-btn {
+  background-image: linear-gradient(to right, #689cf9, #f9bbdd);
+  padding: 0 20px;
+  border-radius: 20px;
+  margin-left: 20px;
+  line-height: 35px;
+  text-align: center;
+  display: inline-block;
+  color: #fff;
+  min-width: 180px;
+  cursor: pointer;
+  margin-top: 60px;
+}
+.setting-rel-box .bottom-btn-outer {
+  margin: 0 auto;
 }
