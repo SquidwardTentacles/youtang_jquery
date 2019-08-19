@@ -45,7 +45,6 @@ $(document).ready(function() {
   // 更改音乐遮罩层 标题点击事件
   $('#drop-title-click span').on('click', function() {
     let id = $(this).data('showid');
-    console.log(id);
     if (id === 0) {
       $('#my-music').show();
       $('#recommend').hide();
@@ -59,28 +58,6 @@ $(document).ready(function() {
       .siblings()
       .removeClass('active');
   });
-  $('#update-click').on('click', function() {
-    console.log($('#upload-file').val());
-  });
-
-  $('#upJQuery').on('click', function() {
-    var fd = new FormData();
-    fd.append('upload', 1);
-    console.log($('#upoload-file').get(0).files[0]);
-
-    fd.append('upfile', $('#upfile').get(0).files[0]);
-    // $.ajax({
-    //   url: 'test.php',
-    //   type: 'POST',
-    //   processData: false,
-    //   contentType: false,
-    //   data: fd,
-    //   success: function(d) {
-    //     console.log(d);
-    //   }
-    // });
-  });
-
   // 更改音乐点击事件 显示遮罩层
   $('#change-music').on('click', function() {
     $('#drop-box-id,.change-music').show();
@@ -105,24 +82,25 @@ $(document).ready(function() {
     $(this).toggleClass('active');
   });
   // 音乐控件
+  let time = 0;
   var audio = document.getElementById('setting-music-id');
   // 设置音乐总时长
-  let timeMusic = 0;
+  // let timeMusic = 0;
   let musicTime = function() {
-    timeMusic = audio.duration;
-    let time = timeMusic / 60;
-    var timeStr = '';
-    console.log(time.toFixed(2));
+    // 将秒数转换成为分钟
+    time = audio.duration / 60;
+    // 保留两位小数
     if (time < 10) {
-      timeStr += '0' + time.toFixed(2);
+      time = '0' + time.toFixed(2);
     } else {
-      timeStr = time.toFixed(2);
+      time = time.toFixed(2);
     }
-    console.log(timeStr);
-
-    $('.duration').html(timeStr);
+    // 符号转换
+    time = time.replace('.', ':');
+    $('.duration #totalTime').html(time);
   };
   audio.addEventListener('canplay', function() {
+    // 获取音乐总时长
     musicTime();
     //监听audio是否加载完毕，如果加载完毕，则读取audio播放时间
     // document.getElementById('audio_length_total').innerHTML = transTime(
@@ -132,32 +110,78 @@ $(document).ready(function() {
   let interval = '';
   let barTime = 0;
   let offsetLeftDefault = 0;
-  $('.control-bar-process').on('click', function(e) {
-    console.log($(this).offset().left);
+  $('.control-bar').on('click', function(event) {
+    // 播放条相对于屏幕左侧的距离
+    var Y = $(this).offset().left;
+    // 播放条点击相对于屏幕左侧的距离
+    let mouseOffset = event.pageX;
+    // 播放条宽度
+    let barTotalWidth = $('.control-bar').innerWidth();
+    let currenClickTime =
+      (parseInt(mouseOffset - Y) / barTotalWidth) * audio.duration;
+    // audio.fastSeek(currentTime);方法，Safari浏览器支持该方法，Chrome浏览器里没有该方法，所以，使用该方法改变audio.currentTime的值之前，需要先判断fastSeek方法是否存在，即
+    if (currenClickTime < audio.duration) {
+      if ('fastSeek' in audio) {
+        // 谷歌浏览器不兼容fastSeek 方法 所以添加条件判断
+        audio.fastSeek(currenClickTime); //改变audio.currentTime的值
+      } else {
+        audio.currentTime = currenClickTime;
+      }
+    } else {
+      audio.pause();
+    }
+    barStyle();
   });
+  let barStyle = function() {
+    // 将改变音乐播放条样式的方法封装 方便调用
+    barTime = parseFloat(audio.currentTime / audio.duration) * 100;
+    $('.control-btn').css('left', barTime + '%');
+    $('.control-bar-process').css('width', 100 - barTime + '%');
+    // 如果当前播放进度等于总进度 就清空计时器
+    if (barTime >= 100) {
+      window.clearInterval(interval);
+      $('.control-music-btn').removeClass('play');
+      $('.control-btn').css('left', 0 + '%');
+      $('.control-bar-process').css('width', 100 + '%');
+    }
+  };
   $('.control-music-btn').on('click', function(e) {
-    console.log($(this).offset().left);
-
+    audioContent();
+  });
+  let audioContent = function() {
     event.stopPropagation(); //防止冒泡
-    if ($(this).hasClass('play')) {
-      $(this).removeClass('play');
+    if ($('.control-music-btn').hasClass('play')) {
+      $('.control-music-btn').removeClass('play');
       audio.pause();
       window.clearInterval(interval);
     } else {
       interval = setInterval(() => {
-        barTime = parseFloat(audio.currentTime / timeMusic) * 100;
-        $('.control-btn').css('left', barTime + '%');
-        $('.control-bar-process').css('width', 100 - barTime + '%');
-        // 如果当前播放进度等于总进度 就清空计时器
-        if (barTime >= 100) {
-          window.clearInterval(interval);
-          $(this).removeClass('play');
-          $('.control-btn').css('left', 0 + '%');
-          $('.control-bar-process').css('width', 100 + '%');
-        }
-      }, 1000);
-      $(this).addClass('play');
+        barStyle();
+      }, 600);
+      $('.control-music-btn').addClass('play');
       audio.play();
     }
-  });
+  };
+  let saveBaseUrl = 'http://localhost:8090';
+  // 遮罩层图片上传
+
+  // $('#upJQuery').on('click', function() {
+  //   let updateFiles = $('#upoload-file')[0].files[0];
+  //   console.log(updateFiles);
+
+  //   let files = updateFiles[0].files[0];
+  //   console.log(files);
+
+  //   const formData = new FormData();
+  //   formData.append('files', files[0]);
+  //   formData.append('file1', files[1]);
+  //   axios
+  //     .post(saveBaseUrl + '/filesUpdate', formData)
+  //     .then(res => {
+  //       console.log(res);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // });
 });
