@@ -547,23 +547,70 @@ html {
 .logo-center-box .add-img .add-img-box {
   justify-content: flex-start;
 }
-.logo-center-box .add-img .add-img-box .update-outer {
+.logo-center-box .add-img .add-img-box .update-outer,
+.pic {
   margin-top: 10px;
   margin-bottom: 10px;
   width: 134px;
-  height: 124px;
+  height: 130px;
   border: solid 1px #eaeaea;
   position: relative;
   cursor: pointer;
   padding: 6px 7px;
   box-sizing: border-box;
 }
+.pic {
+  margin-right: 10px;
+  cursor: move;
+}
+.inbox-backimg {
+  height: 124px;
+}
+.update-img-showbox {
+  /* display: none; */
+}
+.update-img-showbox img {
+  width: 100%;
+  height: 80px;
+  object-fit: contain;
+}
 .logo-center-box .add-img .add-img-box .update-outer .update-music {
   margin: 0 auto;
   width: 100%;
   height: 100%;
 }
-
+.pic .bottom-editbox {
+  height: calc(100% - 80px);
+}
+.pic .bottom-editbox li {
+  width: 20px;
+  padding-right: 3px;
+  height: 30px;
+  cursor: pointer;
+}
+.pic .bottom-editbox li.hidden {
+  display: none;
+}
+.pic .bottom-editbox li.show {
+  background: url('../../static/images/template-imguploladHoverIcon/right.svg')
+    center center/12px auto no-repeat;
+}
+.pic .bottom-editbox li.two {
+  background: url('../../static/images/template-imguploladHoverIcon/change-text.svg')
+    center center/12px auto no-repeat;
+}
+.pic .bottom-editbox li.two:hover {
+  background: url('../../static/images/template-imguploladHoverIcon/change-text-hover.svg')
+    center center/12px auto no-repeat;
+}
+.pic .bottom-editbox li.one {
+  background: url('../../static/images/support.svg') center center/12px auto
+    no-repeat;
+}
+.pic .bottom-editbox li.one:hover {
+  background: url('../../static/images/edit-hover.svg') center center/12px auto
+    no-repeat;
+}
 /* 鼠标的文字提示 */
 .hover-tips .lanuage-icon {
   border-radius: 5px;

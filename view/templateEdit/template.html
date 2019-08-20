@@ -263,6 +263,20 @@
                   <p>已添加照片数：<span>0</span></p>
                 </div>
                 <div class="add-img-box flexbox">
+                  <!-- 显示添加的图片 -->
+                  <div class="update-img-showbox">
+                    <div class="inbox-backimg flexbox j-start" id="backimg">
+                      <div class="pic" id="upload-hidden-imgbox">
+                        <img src="../../static/images/1122.jpg" />
+                        <div class="bottom-editbox flexbox j-end">
+                          <li class="hidden one"></li>
+                          <li class="hidden two"></li>
+                          <li class="show"></li>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 上传图片盒子 -->
                   <div class="update-outer" id="outer-addimg-box">
                     <div class="hover-tips" id="update-tips">
                       <div class="icon-rel-box">
@@ -270,9 +284,16 @@
                         <div class="tips-icon"></div>
                       </div>
                     </div>
+
                     <div class="update-music flexbox">
-                      <span class="add-icon">上传</span>
-                      <input type="file" id="upoload-file" />
+                      <form
+                        action=""
+                        enctype="multipart/form-data"
+                        id="upload-file-form"
+                      >
+                        <span class="add-icon">上传</span>
+                        <input type="file" id="upoload-file-content" />
+                      </form>
                     </div>
                   </div>
                   <p class="tips-text" id="tips-text">拖拽或点击“+”上传图片</p>
@@ -286,6 +307,7 @@
         </div>
       </div>
     </div>
+    <input type="file" name="" id="fileId" />
     <!-- 遮罩框 -->
     <div class="drop-box" id="drop-box-id">
       <div class="rel-box">
@@ -298,17 +320,13 @@
               <span data-showid="1">推荐</span>
             </div>
             <div class="outer-music show" id="my-music">
-              <form
-                enctype="multipart/form-data"
-                action="http://localhost:8090/filesUpdate"
-                method="post"
-              >
+              <form enctype="multipart/form-data" id="uploadForm">
                 <div class="update-music flexbox">
                   <span class="add-icon">上传</span>
                   <input type="file" id="upoload-file" />
                 </div>
                 <input
-                  type="submit"
+                  type="button"
                   value="上传"
                   id="upJQuery"
                   class="update-btn"

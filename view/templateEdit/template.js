@@ -162,19 +162,25 @@ $(document).ready(function() {
       audio.play();
     }
   };
-  let saveBaseUrl = 'http://localhost:8090';
   // 遮罩层图片上传
 
   // $('#upJQuery').on('click', function() {
-  //   let updateFiles = $('#upoload-file')[0].files[0];
-  //   console.log(updateFiles);
+  //   let updateFiles = $('#upoload-file');
+  //   // console.log(updateFiles);
 
-  //   let files = updateFiles[0].files[0];
+  //   // $('#upoload-file').click();
+  //   let files = document.getElementById('upoload-file')[0];
   //   console.log(files);
 
-  //   const formData = new FormData();
-  //   formData.append('files', files[0]);
-  //   formData.append('file1', files[1]);
+  //   // let formData = new formData();
+  //   formData.append('file', files);
+  //   // formData.append('file', updateFiles[0].files[0]);
+  //   // console.log(files);
+  //   console.log(formData);
+
+  //   // const formData = new FormData();
+  //   // formData.append('files', files[0]);
+  //   // formData.append('file1', files[1]);
   //   axios
   //     .post(saveBaseUrl + '/filesUpdate', formData)
   //     .then(res => {
@@ -184,4 +190,67 @@ $(document).ready(function() {
   //       console.log(err);
   //     });
   // });
+  // 封装请求基地址
+  let saveBaseUrl = 'http://localhost:8090';
+  // input change事件
+  $('#upoload-file-content').on('change', function(e) {
+    let file = $(this)[0].files;
+    console.log(file);
+    // 使用formData数据格式发送文件
+    let formData = new FormData();
+    formData.append('file', file[0]);
+    // console.log(formData.get('file'));
+
+    axios
+      .post(saveBaseUrl + '/filesUpdate', formData)
+      .then(res => {
+        console.log(res);
+        if (res.data.errcode === 0) {
+          console.log('chengg');
+
+          var fr = new FileReader();
+          fr.onload = function(e) {
+            let elementStr = `
+            <div class="pic">
+              <img src="${this.result}" />
+            </div>
+            `;
+            // 显示隐藏的显示图片的盒子
+            $('.update-img-showbox').fadeIn('slow');
+            // 添加图片到页面
+            $('#backimg').append(elementStr);
+          };
+          fr.readAsDataURL(file[0]); //读取文件
+        } else {
+          console.log('图片上传保存失败');
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  // 图片上传后隐藏盒子的鼠标移入
+  $('#upload-hidden-imgbox').on('mouseenter', function() {
+    $(this)
+      .find('.show')
+      .css(
+        'background',
+        "url('../../static/images/template-imguploladHoverIcon/remove-hover.svg') center center/12px auto no-repeat"
+      );
+    $(this)
+      .find('.hidden')
+      .fadeIn('slow');
+  });
+  $('#upload-hidden-imgbox').on('mouseleave', function() {
+    $(this)
+      .find('.show')
+      .css(
+        'background',
+        "url('../../static/images/template-imguploladHoverIcon/right.svg') center center/12px auto no-repeat"
+      );
+    $(this)
+      .find('.hidden')
+      .fadeOut('slow');
+  });
 });
