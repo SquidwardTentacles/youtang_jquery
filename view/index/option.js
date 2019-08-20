@@ -84,7 +84,7 @@ $(document).ready(function() {
                     <span>自由入模板</span>
                   </div>
                   <div class="title-box flexbox between use">
-                    <span>使用</span>
+                    <span> <a href="../templateEdit/template.html">使用</a></span>
                   </div>
                 </div>
               </div>
@@ -111,7 +111,7 @@ $(document).ready(function() {
                      <span>自由入模板</span>
                    </div>
                    <div class="title-box flexbox between use">
-                     <span>使用</span>
+                     <span><a href="../templateEdit/template.html">使用</a></span>
                    </div>
                  </div>
                </div>
