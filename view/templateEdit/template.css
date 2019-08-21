@@ -206,7 +206,11 @@ html {
     no-repeat;
   padding-left: 40px;
   box-sizing: border-box;
+  height: 30px;
   margin: 10px 0;
+}
+.select-outer-box#hidden_select_menu {
+  display: none;
 }
 .select-outer-box .select-box {
   width: 100%;
@@ -230,6 +234,7 @@ html {
 }
 .select-hidden-box .hidden-box {
   position: absolute;
+  width: 100%;
   top: 34px;
   left: 50%;
   transform: translateX(-50%);
@@ -272,7 +277,8 @@ html {
 }
 /* 右边信息栏 */
 .right-make-box {
-  /* -webkit-box-flex: 1; */
+  box-sizing: border-box;
+  padding: 0 15px;
   box-flex: 1;
   -webkit-flex: 1 1 auto;
   flex: 1 1 auto;
@@ -283,12 +289,13 @@ html {
   box-shadow: 0 -5px 10px rgba(162, 162, 162, 0.12);
   overflow: hidden;
   display: flex;
-  /* align-items: flex-start; */
   justify-content: flex-start;
   flex-direction: column;
 }
+.right-make-box #delect_box {
+  display: none;
+}
 .right-make-box .top-blank-box {
-  padding: 0 20px;
   line-height: 50px;
   height: 50px;
   border-bottom: solid 1px #edeef1;
@@ -305,9 +312,9 @@ html {
   border-bottom: solid 1px #edeef1;
 }
 .right-make-box .sub-content .sub-logo {
-  padding-left: 85px;
+  padding-left: 55px;
   height: 70px;
-  background: url('../../static/images/normal-music.svg') 20px center/50px auto
+  background: url('../../static/images/normal-music.svg') 0px center/50px auto
     no-repeat;
   line-height: 24px;
   padding-top: 2px;
@@ -349,6 +356,19 @@ html {
   color: #fff;
   background-image: linear-gradient(to right, #689cf9, #f9bbdd);
 }
+.right-make-box .top-blank-box span {
+  display: inline-block;
+  margin-left: 16px;
+  padding-left: 24px;
+  cursor: pointer;
+  background: url('../../static/images/template-img、video-remove/clear.svg')
+    left center/18px auto no-repeat;
+}
+.right-make-box .top-blank-box span:nth-child(1) {
+  background: url('../../static/images/template-imguploladHoverIcon//right.svg')
+    left center/18px auto no-repeat;
+  color: #999;
+}
 /* 遮罩框 */
 .drop-box {
   position: fixed;
@@ -366,7 +386,6 @@ html {
   background: none;
 }
 .drop-box .change-music {
-  display: none;
   width: 850px;
   border-radius: 5px;
   background-color: #fff;
@@ -449,9 +468,14 @@ html {
 .update-music .add-icon {
   display: inline-block;
   padding-top: 40px;
+  width: 40px;
+  height: 40px;
   color: #999;
   background: url('../../static/images/addmusic.svg') center top/34px auto
     no-repeat;
+}
+.element_icon.add-icon {
+  padding: 0;
 }
 .update-music {
   float: left;
@@ -472,6 +496,25 @@ html {
   opacity: 0;
   z-index: 0;
   cursor: pointer;
+}
+.update-music .remark_box {
+  width: 40px;
+  height: 40px;
+  display: block;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.update-music .remark_box.left_edit_box {
+  left: 20px;
+  background: url('../../static/images/template-imguploladHoverIcon/change-image.svg')
+    center center/34px auto no-repeat;
+}
+.update-music .remark_box.right_edit_box {
+  right: 20px;
+  background: url('../../static/images/template-imguploladHoverIcon/change-text\ \(1\).svg')
+    center center/34px auto no-repeat;
 }
 .drop-box .change-music .outer-music.show {
   display: block;
@@ -532,20 +575,44 @@ html {
   cursor: pointer;
   box-shadow: 0 -10px 30px rgba(102, 102, 102, 0.1);
 }
-.right-make-box .logo-center-box {
+.upload_file {
+  overflow-y: auto;
   flex: 1;
   width: 100%;
+}
+.upload_file .upload_inner {
+  height: 33.3%;
+  color: #999;
+  padding: 15px 0;
+  box-sizing: border-box;
+}
+.upload_file .upload_inner#have_img_show {
+  display: none;
+}
+.right-make-box .logo-center-box {
+  border-bottom: solid 1px #edeef1;
+  border-top: solid 1px #edeef1;
+}
+.upload_inner .change_content {
+  width: 134px;
+  height: 124px;
+  border: 1px solid #edeef1;
+  margin-top: 10px;
+}
+.upload_inner .change_content .bg {
+  height: 94px;
 }
 .right-make-box .logo-center-box .add-img .default-title {
   color: #999;
   margin-bottom: 10px;
 }
-.right-make-box .logo-center-box .add-img {
-  padding: 15px 20px;
+.upload_inner .right-make-box .logo-center-box .add-img {
+  padding-top: 15px;
 }
 /* 拖拽或者点击上传图片 */
 .logo-center-box .add-img .add-img-box {
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 .logo-center-box .add-img .add-img-box .update-outer,
 .pic {
@@ -658,7 +725,6 @@ html {
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.5);
-  display: none;
   position: absolute;
   left: 50%;
   top: 50%;

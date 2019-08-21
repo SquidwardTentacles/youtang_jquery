@@ -243,9 +243,46 @@
           </div>
         </div>
         <div class="right-make-box">
-          <div class="top-blank-box"></div>
+          <li class="select-outer-box" id="hidden_select_menu">
+            <div class="select-hidden-box" id="outer-hiddenbox">
+              <!-- 触发按钮 -->
+              <div class="select-box flexbox j-start">
+                <span id="select-content">16:9（横屏）</span
+                ><span class="bottom-icon"
+                  ><svg
+                    class="icon icon-down"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    is="icon"
+                    viewBox="0 0 12 12"
+                    width="12px"
+                    height="12px"
+                  >
+                    <polyline
+                      style="stroke-linecap:round;"
+                      points="1.5,3.3 6,8.3 10.5,3.3"
+                    ></polyline>
+                  </svg>
+                </span>
+              </div>
+              <!-- 隐藏的内容 -->
+              <div class="hidden-box" id="select-hidden-box">
+                <ul>
+                  <li class="active">16:9（横屏）</li>
+                  <li>1：1（正方形）</li>
+                  <li>9:16（竖屏）</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <div class="top-blank-box">
+            <div id="delect_box">
+              <span>移除</span>
+              <span>清空</span>
+            </div>
+          </div>
           <div class="sub-content flexbox">
-            <div class="logo-top-box flexbox">
+            <div class="logo-top-box flexbox between">
               <div class="sub-logo">
                 <div>
                   <p class="top">默认</p>
@@ -257,46 +294,77 @@
                 <div class="button" id="music-setting-click">音乐设置</div>
               </div>
             </div>
-            <div class="logo-center-box">
-              <div class="add-img">
-                <div class="default-title">
-                  <p>已添加照片数：<span>0</span></p>
+            <div class="upload_file">
+              <div class="upload_inner begin_box" id="have_img_show">
+                <span class="tips_title">片头</span>
+                <div class="change_content">
+                  <div class="bg flexbox">
+                    <p>文字</p>
+                  </div>
                 </div>
-                <div class="add-img-box flexbox">
-                  <!-- 显示添加的图片 -->
-                  <div class="update-img-showbox">
-                    <div class="inbox-backimg flexbox j-start" id="backimg">
-                      <div class="pic" id="upload-hidden-imgbox">
-                        <img src="../../static/images/1122.jpg" />
-                        <div class="bottom-editbox flexbox j-end">
-                          <li class="hidden one"></li>
-                          <li class="hidden two"></li>
-                          <li class="show"></li>
+              </div>
+              <div class="upload_inner logo-center-box">
+                <div class="add-img">
+                  <div class="default-title">
+                    <p>已添加照片数：<span>0</span></p>
+                  </div>
+                  <div class="add-img-box flexbox">
+                    <!-- 显示添加的图片 -->
+                    <div class="update-img-showbox">
+                      <div class="inbox-backimg flexbox j-start" id="backimg">
+                        <!-- <div class="pic" id="upload-hidden-imgbox">
+                              <img src="../../static/images/1122.jpg" />
+                              <div class="bottom-editbox flexbox j-end">
+                                <li class="hidden one"></li>
+                                <li class="hidden two"></li>
+                                <li class="show"></li>
+                              </div>
+                            </div> -->
+                      </div>
+                    </div>
+                    <!-- 上传图片盒子 -->
+                    <div class="update-outer" id="outer-addimg-box">
+                      <div class="hover-tips" id="update-tips">
+                        <div class="icon-rel-box">
+                          <div class="lanuage-icon">添加素材</div>
+                          <div class="tips-icon"></div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <!-- 上传图片盒子 -->
-                  <div class="update-outer" id="outer-addimg-box">
-                    <div class="hover-tips" id="update-tips">
-                      <div class="icon-rel-box">
-                        <div class="lanuage-icon">添加素材</div>
-                        <div class="tips-icon"></div>
+
+                      <div class="update-music flexbox" id="add_img_uploadbox">
+                        <form
+                          action=""
+                          enctype="multipart/form-data"
+                          id="upload-file-form"
+                        >
+                          <span
+                            class="add-icon element_icon"
+                            id="add_icon"
+                          ></span>
+                          <span
+                            class="remark_box left_edit_box"
+                            id="left_edit_box"
+                          ></span>
+                          <input type="file" id="upoload-file-content" />
+                          <span
+                            class="remark_box right_edit_box"
+                            id="right_edit_box"
+                          ></span>
+                        </form>
                       </div>
                     </div>
-
-                    <div class="update-music flexbox">
-                      <form
-                        action=""
-                        enctype="multipart/form-data"
-                        id="upload-file-form"
-                      >
-                        <span class="add-icon">上传</span>
-                        <input type="file" id="upoload-file-content" />
-                      </form>
-                    </div>
+                    <p class="tips-text" id="tips-text">
+                      拖拽或点击“+”上传图片
+                    </p>
                   </div>
-                  <p class="tips-text" id="tips-text">拖拽或点击“+”上传图片</p>
+                </div>
+              </div>
+              <div class="upload_inner end_box" id="have_img_show1">
+                <span class="tips_title">片尾</span>
+                <div class="change_content">
+                  <div class="bg flexbox">
+                    <p>文字</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -311,99 +379,10 @@
     <!-- 遮罩框 -->
     <div class="drop-box" id="drop-box-id">
       <div class="rel-box">
-        <!-- 更改音乐弹窗 -->
-        <div class="change-music">
-          <div class="in-rel-box">
-            <p class="closeIcon" id="closeIcon">×</p>
-            <div class="title-box" id="drop-title-click">
-              <span class="active" data-showid="0">我的音乐</span>
-              <span data-showid="1">推荐</span>
-            </div>
-            <div class="outer-music show" id="my-music">
-              <form enctype="multipart/form-data" id="uploadForm">
-                <div class="update-music flexbox">
-                  <span class="add-icon">上传</span>
-                  <input type="file" id="upoload-file" />
-                </div>
-                <input
-                  type="button"
-                  value="上传"
-                  id="upJQuery"
-                  class="update-btn"
-                />
-              </form>
-            </div>
-            <!-- 遮罩层 推荐内容 -->
-            <div class="outer-music hidden" id="recommend">
-              <div class="music-box">
-                <div class="check-icon active"></div>
-              </div>
-              <input
-                type="button"
-                value="上传"
-                id="upJQuery"
-                class="update-btn"
-              />
-            </div>
-          </div>
-        </div>
-
         <!-- 音乐设置弹窗 -->
-        <div class="setting-music">
-          <div class="setting-rel-box">
-            <p class="closeIcon" id="closeIcon2">×</p>
-            <p class="box-title">音乐截取（默认）</p>
-            <div class="audio-box">
-              <audio src="../../static/music.mp3" id="setting-music-id">
-                您的浏览器不支持 audio 标签。
-              </audio>
-              <div class="control-music flexbox">
-                <div class="control-music-btn"></div>
-                <div class="control-bar">
-                  <div class="control-bar-process" style="width: 100%"></div>
-                  <div class="control-btn left-control" style="left: 0%;">
-                    <span>00:00</span>
-                  </div>
-                  <div class="control-btn right-control" style="left: 100%;">
-                    <span>141</span>
-                  </div>
-                </div>
-                <div class="duration">
-                  <span id="totalTime">00:00</span>
-                </div>
-              </div>
-            </div>
-            <div class="check">
-              <div class="checkbox flexbox j-end" id="checkbox-click">
-                <div class="checkbox-icon">
-                  <svg
-                    class="icon icon-checkbox"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    is="icon"
-                    type="checkbox"
-                    viewBox="0 0 18 18"
-                    width="19px"
-                    height="19px"
-                  >
-                    <path
-                      style="stroke:none; fill:currentColor"
-                      d="M12.7,4.3C11,6.6,8.9,9.1,8.1,12c-0.9-1-1.9-2-2.9-2.8c-0.7-0.5-1.6,0.4-0.9,1c1.3,1,2.5,2.3,3.7,3.6c0.3,0.3,1,0.2,1.1-0.3C9.6,10.3,12,7.6,13.9,5C14.4,4.3,13.2,3.6,12.7,4.3"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="checkbox-label">
-                  淡入淡出
-                </div>
-              </div>
-            </div>
-            <div class="bottom-btn-outer flexbox">
-              <div class="bottom-btn">确定</div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </body>
+
   <script src="./template.js"></script>
 </html>

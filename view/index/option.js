@@ -29,8 +29,6 @@ $(document).ready(function() {
   };
   // i 分页 requestObj请求携带的参数  clearElement是否清空后再赋值0 不清空 1 清空 str 菜单栏点击的内容
   let getData = (i, requestObj, clearElement, str) => {
-    console.log(str);
-
     let reqData = '';
     // 参数来源于下拉菜单
     if (requestObj && requestObj.type == 1) {
@@ -75,7 +73,7 @@ $(document).ready(function() {
                 <div class="show-box">
                   <div class="img-box">
                     <img src="${element.cover_thumb_url}" alt="" />
-                    <video autoplay="autoplay" id="low_video" preload="none" data-dataobj='${videoObj}' muted="false" loop="loop" poster="${
+                    <video width="100%" autoplay="autoplay" id="low_video" preload="none" data-dataobj='${videoObj}' muted="false" loop="loop" poster="${
                 element.cover_thumb_url
               }" src="${element.low_video_url}"></video>
                   </div>
@@ -102,7 +100,7 @@ $(document).ready(function() {
                  <div class="show-box">
                    <div class="img-box">
                      <img src="${element.cover_thumb_url}" alt="" />
-                     <video autoplay="autoplay" muted="muted" src="${
+                     <video width="100%" autoplay="autoplay" muted="muted" src="${
                        element.low_video_url
                      }"></video>
                    </div>
@@ -276,27 +274,34 @@ $(document).ready(function() {
   });
 
   //下拉菜单 内容显示的筛选点击事件
-  let elementClass = '';
   $('#select-choose_click p').on('mouseenter', function() {
     // class 名称被绑定到对应的data数据中 在鼠标移入时 为变量赋值并记录 以便于在鼠标移除时控制相关影藏
-    elementClass = $(this).data('show');
-    $(`.hideMenu.${elementClass}`).css('display', 'block');
+    // elementClass = $(this).data('show');
+    $(this)
+      .parent('.outerAllBox')
+      .siblings('.hideMenu')
+      .css('display', 'block');
   });
   $('#select-choose_click p').on('click', function() {
     // class 名称被绑定到对应的data数据中 在鼠标移入时 为变量赋值并记录 以便于在鼠标移除时控制相关影藏
     elementClass = $(this).data('show');
-    $(`.hideMenu.${elementClass}`).css('display', 'none');
+    $(this)
+      .parent('.outerAllBox')
+      .siblings('.hideMenu')
+      .css('display', 'none');
   });
   // 列表标题 全部 外面的大盒子的鼠标移除 下拉菜单影藏
   $('.outerAllBox').on('mouseleave', function() {
-    $(`.hideMenu.${elementClass}`).css('display', 'none');
+    $(this)
+      .siblings('.hideMenu')
+      .css('display', 'none');
   });
   // 下拉菜单盒子鼠标移除 盒子影藏
   $('.rightBox .hideMenu').on('mouseleave', function() {
-    $(`.hideMenu.${elementClass}`).css('display', 'none');
+    $(this).css('display', 'none');
   });
   $('.rightBox .hideMenu').on('mouseenter', function() {
-    $(`.hideMenu.${elementClass}`).css('display', 'block');
+    $(this).css('display', 'block');
   });
 
   // 选择菜单a标签的点击事件
@@ -338,7 +343,7 @@ $(document).ready(function() {
     // type参数用于判断参数是从下拉菜单（1）传递的还是从模板筛选菜单栏传递的（0）
     typeObj.type = 1;
     // 点击后关闭菜单栏
-    $(`.hideMenu.${elementClass}`).css('display', 'none');
+    $(`.hideMenu`).css('display', 'none');
     //阻止事件冒泡
     e.stopPropagation();
     // 发送请求 并且携带参数 发送请求前 先清空ul下已有元素 第三个参数为1 清空 0或者不传则不清空
