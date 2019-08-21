@@ -732,6 +732,7 @@ html {
   padding: 36px;
   padding-bottom: 0;
   box-sizing: border-box;
+  display: none;
 }
 .drop-box .rel-box .setting-music .box-title {
   font-size: 18px;

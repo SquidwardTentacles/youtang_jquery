@@ -114,9 +114,7 @@ $(document).ready(function() {
   });
   // 音乐设置点击事件
   $('#music-setting-click').on('click', function() {
-    $('#drop-box-id')
-      .show()
-      .html(musicSetting);
+    $('#drop-box-id,.setting-music').show();
   });
   // 音乐设置淡入淡出点击事件
   $('#checkbox-click').on('click', function() {
