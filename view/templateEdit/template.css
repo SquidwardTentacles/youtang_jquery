@@ -166,8 +166,10 @@ html {
   width: 100%;
   height: 128px;
   margin-top: 20px;
-  background: url('../../static/images/video-img.jpg') center center/cover
-    no-repeat;
+}
+.content-box .video-img img {
+  width: 100%;
+  height: 100%;
 }
 .content-box .show-box {
   margin-top: 10px;
@@ -389,10 +391,6 @@ html {
   width: 850px;
   border-radius: 5px;
   background-color: #fff;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   height: 580px;
   padding-top: 40px;
 }
@@ -586,8 +584,12 @@ html {
   padding: 15px 0;
   box-sizing: border-box;
 }
-.upload_file .upload_inner#have_img_show {
+.upload_file .upload_inner#have_img_show,
+.upload_file .upload_inner#have_img_show1 {
   display: none;
+}
+.upload_file .upload_inner .change_content {
+  cursor: pointer;
 }
 .right-make-box .logo-center-box {
   border-bottom: solid 1px #edeef1;
@@ -725,14 +727,9 @@ html {
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.5);
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   padding: 36px;
   padding-bottom: 0;
   box-sizing: border-box;
-  display: none;
 }
 .drop-box .rel-box .setting-music .box-title {
   font-size: 18px;
@@ -886,4 +883,178 @@ html {
 }
 .setting-rel-box .bottom-btn-outer {
   margin: 0 auto;
+}
+/* 片头遮罩层 */
+.titles {
+  width: 650px;
+  height: 600px;
+  background-color: #fff;
+}
+.titles .titles_innerrel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+.titles .titles_innerrel .icon_box p {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+  box-shadow: 0 0 10px #666;
+}
+/* 关闭按钮 */
+.titles .titles_innerrel .icon_box p.close {
+  background-color: #fff;
+  top: -35px;
+  line-height: 26px;
+  text-align: center;
+  right: -30px;
+  font-size: 26px;
+}
+/* 左右切换按钮 */
+.titles .titles_innerrel .icon_box p.toggle {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.titles .titles_innerrel .toggle.left_icon {
+  background: url('../../static/images/drop-toggle/left-icon.svg') center
+    center/10px auto no-repeat #689cf9;
+  left: -40px;
+}
+.titles .titles_innerrel .toggle.right_icon {
+  background: url('../../static/images/drop-toggle/right-icon.svg') center
+    center/10px auto no-repeat #689cf9;
+  right: -40px;
+}
+.titles .titles_innerrel .icon_box p.toggle.disable {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+/* 遮罩框顶部盒子 */
+.titles .titles_innerrel .top_img_bg {
+  width: 100%;
+  height: 360px;
+}
+.titles .titles_innerrel .top_img_bg img {
+  width: 100%;
+  object-fit: cover;
+}
+/* 操作按钮盒子 */
+.titles .titles_innerrel .operation p {
+  padding-left: 30px;
+  font-size: 16px;
+  margin-right: 20px;
+  cursor: pointer;
+  background: url('../../static/images/drop-toggle/reset.svg') left center/20px
+    auto no-repeat;
+}
+.titles .titles_innerrel .operation p:hover {
+  background: url('../../static/images/drop-toggle/reset-hover.svg') left
+    center/20px auto no-repeat;
+  color: #5b93e7;
+}
+.titles .titles_innerrel .operation p:nth-child(2) {
+  background: url('../../static/images/drop-toggle/empty.svg') left center/20px
+    auto no-repeat;
+}
+.titles .titles_innerrel .operation p:nth-child(2):hover {
+  background: url('../../static/images/drop-toggle/empty-hover.svg') left
+    center/20px auto no-repeat;
+}
+/* 输入框 */
+.titles .titles_innerrel .input_box {
+  margin: 5px 10px 35px 10px;
+  height: 50px;
+}
+.titles .titles_innerrel .input_box input {
+  flex: 1;
+  border-bottom: 1px solid #edeef1;
+  height: 90%;
+}
+.titles .titles_innerrel .input_box p {
+  width: 50px;
+  color: #888;
+  font-size: 16px;
+  margin-left: 10px;
+  white-space: nowrap;
+}
+/* 按钮 */
+.titles .titles_innerrel .btn_box {
+  display: inline-block;
+  width: 130px;
+  height: 34px;
+  line-height: 34px;
+  border-radius: 17px;
+  margin-top: 10px;
+  color: #fff;
+  background-image: linear-gradient(to right, #4889ff, #ff9ad1);
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* 滤镜弹窗 */
+.titles .titles_innerrel .operation {
+  margin-top: 25px;
+  height: 40px;
+  margin-bottom: 15px;
+}
+.titles .titles_innerrel .operation.filter {
+  margin-bottom: 90px;
+}
+.titles .titles_innerrel .operation li {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.titles .titles_innerrel .operation li .inner {
+  margin: 0 auto;
+  padding-top: 25px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 16px;
+}
+.titles_innerrel .operation li.change .inner {
+  background: url('../../static/images/beautiful/replace.svg') center top/20px
+    auto no-repeat;
+}
+.titles_innerrel .operation li.change .inner:hover {
+  background-image: url('../../static/images/beautiful/replace-hover.svg');
+  color: #5b93e7;
+}
+.titles_innerrel .operation li.rotate .inner {
+  background: url('../../static/images/beautiful/rotate.svg') center top/20px
+    auto no-repeat;
+}
+.titles_innerrel .operation li.rotate .inner:hover {
+  background-image: url('../../static/images/beautiful/rotate-hover.svg');
+  color: #5b93e7;
+}
+.titles_innerrel .operation li.self_adaption .inner {
+  background: url('../../static/images/beautiful/self-adaption.svg') center
+    top/20px auto no-repeat;
+}
+.titles_innerrel .operation li.self_adaption .inner:hover {
+  background-image: url('../../static/images/beautiful/self-adaption-hover.svg');
+  color: #5b93e7;
+}
+.titles_innerrel .operation li.filter .inner {
+  background: url('../../static/images/beautiful/filter.svg') center top/20px
+    auto no-repeat;
+}
+.titles_innerrel .operation li.filter .inner:hover {
+  background-image: url('../../static/images/beautiful/filter-hover.svg');
+  color: #5b93e7;
+}
+.titles_innerrel .operation li.reset .inner {
+  background: url('../../static/images/beautiful/reset.svg') center top/20px
+    auto no-repeat;
+}
+.titles_innerrel .operation li.reset .inner:hover {
+  background-image: url('../../static/images/beautiful/reset-hover.svg');
+  color: #5b93e7;
 }

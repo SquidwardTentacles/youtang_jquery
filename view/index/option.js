@@ -1,5 +1,10 @@
+// 引入静态资源
+document.write("<script type='text/javascript' src='data.js'></script>");
 $(document).ready(function() {
   // 设置axios默认的请求地址
+  // 页面加载即显示动画
+  $('#droupTopbox').html(loadingElement);
+
   // axios.defaults.baseURL = 'https://lightmvapi.aoscdn.com';
   let getBaseUrl = 'https://lightmvapi.aoscdn.com';
   let saveBaseUrl = 'http://localhost:8090';
@@ -73,7 +78,7 @@ $(document).ready(function() {
                 <div class="show-box">
                   <div class="img-box">
                     <img src="${element.cover_thumb_url}" alt="" />
-                    <video width="100%" autoplay="autoplay" id="low_video" preload="none" data-dataobj='${videoObj}' muted="false" loop="loop" poster="${
+                    <video width="100%" autoplay="autoplay" id="low_video loading${i}" preload="none" data-dataobj='${videoObj}' muted="false" loop="loop" poster="${
                 element.cover_thumb_url
               }" src="${element.low_video_url}"></video>
                   </div>
@@ -82,7 +87,9 @@ $(document).ready(function() {
                     <span>自由入模板</span>
                   </div>
                   <div class="title-box flexbox between use">
-                    <span> <a href="../templateEdit/template.html">使用</a></span>
+                    <span> <a href="../templateEdit/template.html?url=${
+                      element.cover_thumb_url
+                    }">使用</a></span>
                   </div>
                 </div>
               </div>
@@ -102,14 +109,16 @@ $(document).ready(function() {
                      <img src="${element.cover_thumb_url}" alt="" />
                      <video width="100%" autoplay="autoplay" muted="muted" src="${
                        element.low_video_url
-                     }"></video>
+                     }" id="loading${i}"></video>
                    </div>
                    <div class="title-box">
                      <span>${element.title}</span>
                      <span>自由入模板</span>
                    </div>
                    <div class="title-box flexbox between use">
-                     <span><a href="../templateEdit/template.html">使用</a></span>
+                     <span><a href="../templateEdit/template.html?url=${
+                       element.cover_thumb_url
+                     }">使用</a></span>
                    </div>
                  </div>
                </div>
@@ -232,6 +241,14 @@ $(document).ready(function() {
               .find('h2')
               .html(str);
           }
+          let video = document.getElementById('loading' + (i ? i : ''));
+          console.log('loading' + (i ? i : ''));
+
+          video.addEventListener('loadedmetadata', function(e) {
+            // 视频加载完成关闭遮罩层
+            $('#droupTopbox').css('display', 'none');
+            console.log('active');
+          });
           $('.free').css('display', 'block');
         } else {
           this.$message.error('请求失败');
@@ -263,14 +280,14 @@ $(document).ready(function() {
   // 视频点击放大
   $(document).on('click', '#low_video', function() {
     let objstr = $(this).data('dataobj');
+    // 弹出框的显示
+    $('#droupTopbox')
+      .css('display', 'block')
+      .html(videoElemenmt);
     // 赋值视频地址
     $('#droupVideo').prop('src', objstr.video_url);
     // 赋值标题
     $('#video_title').html(objstr.title);
-    // 弹出框的显示
-    $('#droupTopbox').css('display', 'block');
-    // 弹出框内的视频显示
-    $('.outer-video-box').css('display', 'block');
   });
 
   //下拉菜单 内容显示的筛选点击事件
@@ -377,7 +394,7 @@ $(document).ready(function() {
     }
   };
   // 暂时注释 注册页面滚动事件
-  // window.addEventListener('scroll', handleScroll, true);
+  window.addEventListener('scroll', handleScroll, true);
   // 将产品列表的鼠标事件封装 每次发送请求时都调用一次 给新添加的元素注册事件
   let mouseEvent = function() {
     $('#contentBoxList li').on('mouseenter', function() {
@@ -418,20 +435,19 @@ $(document).ready(function() {
 
   // 选择语言 语言的点击事件 设置内容 弹出式遮罩框
   $('#dropUl li').on('click', function(e) {
-    // $('#dropdownMenu2').value = e.target.innerHTML;
     $('#dropdownMenu2')[0].value = e.target.innerHTML;
     $('#droupTopbox').css('display', 'none');
   });
   $('.inputBoxClick').on('click', function() {
-    $('#droupTopbox').css('display', 'block');
-    // 多语言选择框
-    $('#dropUl').css('display', 'block');
+    $('#droupTopbox')
+      .css('display', 'block')
+      .empty()
+      .html(lanuageElement);
   });
   // 关闭按钮点击事件
-  $('#closeIcon,#closeIcon2').on('click', function() {
+  $(document).on('click', '#closeIcon,#closeIcon2', function() {
     // 关闭选择语言弹出框
     $('#droupTopbox').css('display', 'none');
-    $('#dropUl').css('display', 'none');
     // 关闭弹出框的同时清空视频地址
     $('#droupVideo').prop('src', '');
     // 弹出框内的视频的隐藏

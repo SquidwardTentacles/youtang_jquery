@@ -1,6 +1,10 @@
 // 引入静态资源
 document.write("<script type='text/javascript' src='data.js'></script>");
 $(document).ready(function() {
+  // 获取url传递过来的连接
+  let local_url = document.location.href;
+  let url = local_url.substr(local_url.indexOf('=') + 1);
+  $('#left_menu_img').attr('src', url);
   // 监听屏幕宽度
   $(window).resize(function() {
     let width = $(this).width();
@@ -114,92 +118,99 @@ $(document).ready(function() {
   });
   // 音乐设置点击事件
   $('#music-setting-click').on('click', function() {
-    $('#drop-box-id,.setting-music').show();
+    $('#drop-box-id')
+      .show()
+      .find('.rel-box')
+      .html(musicSetting);
+    // 调用音乐相关事件
+    musicContent();
   });
   // 音乐设置淡入淡出点击事件
-  $('#checkbox-click').on('click', function() {
+  $(document).on('click', '#checkbox-click', function() {
     $(this).toggleClass('active');
   });
   // 音乐控件
-  let time = 0;
-  let audio = document.getElementById('setting-music-id');
-  // 设置音乐总时长
-  // let timeMusic = 0;
-  let musicTime = function() {
-    // 将秒数转换成为分钟
-    time = audio.duration / 60;
-    // 保留两位小数
-    if (time < 10) {
-      time = '0' + time.toFixed(2);
-    } else {
-      time = time.toFixed(2);
-    }
-    // 符号转换
-    time = time.replace('.', ':');
-    $('.duration #totalTime').html(time);
-  };
-  audio.addEventListener('canplay', function() {
-    // 获取音乐总时长
-    musicTime();
-    //监听audio是否加载完毕，如果加载完毕，则读取audio播放时间
-    // document.getElementById('audio_length_total').innerHTML = transTime(
-    //   audio.duration
-    // );
-  });
-  let interval = '';
-  let barTime = 0;
-  let offsetLeftDefault = 0;
-  $('.control-bar').on('click', function(event) {
-    // 播放条相对于屏幕左侧的距离
-    let Y = $(this).offset().left;
-    // 播放条点击相对于屏幕左侧的距离
-    let mouseOffset = event.pageX;
-    // 播放条宽度
-    let barTotalWidth = $('.control-bar').innerWidth();
-    let currenClickTime =
-      (parseInt(mouseOffset - Y) / barTotalWidth) * audio.duration;
-    // audio.fastSeek(currentTime);方法，Safari浏览器支持该方法，Chrome浏览器里没有该方法，所以，使用该方法改变audio.currentTime的值之前，需要先判断fastSeek方法是否存在，即
-    if (currenClickTime < audio.duration) {
-      if ('fastSeek' in audio) {
-        // 谷歌浏览器不兼容fastSeek 方法 所以添加条件判断
-        audio.fastSeek(currenClickTime); //改变audio.currentTime的值
+  let musicContent = function() {
+    let time = 0;
+    let audio = document.getElementById('setting-music-id');
+    // 设置音乐总时长
+    // let timeMusic = 0;
+    let musicTime = function() {
+      // 将秒数转换成为分钟
+      time = audio.duration / 60;
+      // 保留两位小数
+      if (time < 10) {
+        time = '0' + time.toFixed(2);
       } else {
-        audio.currentTime = currenClickTime;
+        time = time.toFixed(2);
       }
-    } else {
-      audio.pause();
-    }
-    barStyle();
-  });
-  let barStyle = function() {
-    // 将改变音乐播放条样式的方法封装 方便调用
-    barTime = parseFloat(audio.currentTime / audio.duration) * 100;
-    $('.control-btn').css('left', barTime + '%');
-    $('.control-bar-process').css('width', 100 - barTime + '%');
-    // 如果当前播放进度等于总进度 就清空计时器
-    if (barTime >= 100) {
-      window.clearInterval(interval);
-      $('.control-music-btn').removeClass('play');
-      $('.control-btn').css('left', 0 + '%');
-      $('.control-bar-process').css('width', 100 + '%');
-    }
-  };
-  $('.control-music-btn').on('click', function(e) {
-    audioContent();
-  });
-  let audioContent = function() {
-    event.stopPropagation(); //防止冒泡
-    if ($('.control-music-btn').hasClass('play')) {
-      $('.control-music-btn').removeClass('play');
-      audio.pause();
-      window.clearInterval(interval);
-    } else {
-      interval = setInterval(() => {
-        barStyle();
-      }, 600);
-      $('.control-music-btn').addClass('play');
-      audio.play();
-    }
+      // 符号转换
+      time = time.replace('.', ':');
+      $('.duration #totalTime').html(time);
+    };
+    audio.addEventListener('canplay', function() {
+      // 获取音乐总时长
+      musicTime();
+      //监听audio是否加载完毕，如果加载完毕，则读取audio播放时间
+      // document.getElementById('audio_length_total').innerHTML = transTime(
+      //   audio.duration
+      // );
+    });
+    let interval = '';
+    let barTime = 0;
+    let offsetLeftDefault = 0;
+    $('.control-bar').on('click', function(event) {
+      // 播放条相对于屏幕左侧的距离
+      let Y = $(this).offset().left;
+      // 播放条点击相对于屏幕左侧的距离
+      let mouseOffset = event.pageX;
+      // 播放条宽度
+      let barTotalWidth = $('.control-bar').innerWidth();
+      let currenClickTime =
+        (parseInt(mouseOffset - Y) / barTotalWidth) * audio.duration;
+      // audio.fastSeek(currentTime);方法，Safari浏览器支持该方法，Chrome浏览器里没有该方法，所以，使用该方法改变audio.currentTime的值之前，需要先判断fastSeek方法是否存在，即
+      if (currenClickTime < audio.duration) {
+        if ('fastSeek' in audio) {
+          // 谷歌浏览器不兼容fastSeek 方法 所以添加条件判断
+          audio.fastSeek(currenClickTime); //改变audio.currentTime的值
+        } else {
+          audio.currentTime = currenClickTime;
+        }
+      } else {
+        audio.pause();
+      }
+      barStyle();
+    });
+    let barStyle = function() {
+      // 将改变音乐播放条样式的方法封装 方便调用
+      barTime = parseFloat(audio.currentTime / audio.duration) * 100;
+      $('.control-btn').css('left', barTime + '%');
+      $('.control-bar-process').css('width', 100 - barTime + '%');
+      // 如果当前播放进度等于总进度 就清空计时器
+      if (barTime >= 100) {
+        window.clearInterval(interval);
+        $('.control-music-btn').removeClass('play');
+        $('.control-btn').css('left', 0 + '%');
+        $('.control-bar-process').css('width', 100 + '%');
+      }
+    };
+    $('.control-music-btn').on('click', function(e) {
+      audioContent();
+    });
+    let audioContent = function() {
+      event.stopPropagation(); //防止冒泡
+      if ($('.control-music-btn').hasClass('play')) {
+        $('.control-music-btn').removeClass('play');
+        audio.pause();
+        window.clearInterval(interval);
+      } else {
+        interval = setInterval(() => {
+          barStyle();
+        }, 600);
+        $('.control-music-btn').addClass('play');
+        audio.play();
+      }
+    };
   };
   // 封装请求基地址
   let saveBaseUrl = 'http://localhost:8090';
@@ -283,7 +294,6 @@ $(document).ready(function() {
       .stop()
       .fadeOut('slow');
   });
-  // };
 
   // 页面添加图片动画
   $('#add_img_uploadbox').on('mouseenter', function() {
@@ -326,5 +336,42 @@ $(document).ready(function() {
       .find('#add_icon')
       .stop()
       .show();
+  });
+
+  // ‘片头’ 点击事件
+  $(document).on(
+    'click',
+    '#have_img_show .change_content,#have_img_show1 .change_content',
+    function() {
+      $('#drop-box-id')
+        .show()
+        .find('.rel-box')
+        .html(titlesData);
+      $('#droup_img_titles').attr('src', url);
+    }
+  );
+  // ‘片头’ 关闭按钮点击事件
+  $(document).on('click', '#titles_close', function() {
+    $('#drop-box-id').hide();
+  });
+  // ‘开头’ 下一页点击事件
+  $(document).on('click', '#titles_next', function() {
+    $('#drop-box-id')
+      .empty()
+      .html(picticeFilter);
+    $('#droup_filter_img').attr('src', url);
+  });
+  $(document).on('click', '#titles_last', function() {
+    $('#drop-box-id')
+      .empty()
+      .html(titlesData);
+  });
+  // 清空按钮的点击事件
+  $(document).on('click', '#clear_input_data', function() {
+    $('#titles_input').val('');
+    $('#feed_in').html('0');
+  });
+  $(document).on('input propertychange', '#titles_input', function() {
+    $('#feed_in').html($(this).val().length);
   });
 });

@@ -35,6 +35,10 @@ h3 {
   margin: 0;
   padding: 0;
 }
+input {
+  border: none;
+  outline: none;
+}
 li {
   margin-bottom: 0;
   list-style: none;
@@ -98,4 +102,11 @@ ul {
   cursor: pointer;
   border: 1px solid #ccc;
   width: auto;
+}
+/* 定位居中 */
+.rel_center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
