@@ -78,7 +78,7 @@ $(document).ready(function() {
                 <div class="show-box">
                   <div class="img-box">
                     <img src="${element.cover_thumb_url}" alt="" />
-                    <video width="100%" autoplay="autoplay" id="low_video loading${i}" preload="none" data-dataobj='${videoObj}' muted="false" loop="loop" poster="${
+                    <video width="100%" autoplay="autoplay" id="low_video loading${index}" preload="none" data-dataobj='${videoObj}' muted="false" loop="loop" poster="${
                 element.cover_thumb_url
               }" src="${element.low_video_url}"></video>
                   </div>
@@ -241,8 +241,8 @@ $(document).ready(function() {
               .find('h2')
               .html(str);
           }
-          let video = document.getElementById('loading' + (i ? i : ''));
-          console.log('loading' + (i ? i : ''));
+          let video = document.getElementById('loading' + 1);
+          console.log(video);
 
           video.addEventListener('loadedmetadata', function(e) {
             // 视频加载完成关闭遮罩层
