@@ -407,7 +407,7 @@ $(document).ready(function() {
       document.body.clientHeight; //浏览器高度
     console.log(scrollTop + windowHeight, scrollHeight);
 
-    if (scrollTop + windowHeight == scrollHeight - 400 || pageData === 2) {
+    if (scrollTop + windowHeight == scrollHeight) {
       // console.log(
       //   '距顶部' +
       //     scrollTop +
