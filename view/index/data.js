@@ -126,8 +126,8 @@ let lanuageElement = `
       </ul>
 `;
 let loadingElement = `
-<div class="loading_box ">
-<p class="closeIcon loading_drop" id="closeIcon2">×</p>
-        <div class="inner"></div>
-      </div>
+  <div class="loading_box ">
+    <p class="closeIcon loading_drop" id="closeIcon2">×</p>
+    <div class="inner"></div>
+  </div>
 `;

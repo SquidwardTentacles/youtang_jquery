@@ -2,9 +2,6 @@
 document.write("<script type='text/javascript' src='data.js'></script>");
 $(document).ready(function() {
   // 设置axios默认的请求地址
-  // 页面加载即显示动画
-  $('#droupTopbox').html(loadingElement);
-
   // axios.defaults.baseURL = 'https://lightmvapi.aoscdn.com';
   let getBaseUrl = 'https://lightmvapi.aoscdn.com';
   let saveBaseUrl = 'http://localhost:8090';
@@ -32,8 +29,34 @@ $(document).ready(function() {
     */
     order_field: 'orderby'
   };
+  // 声明一个变量 验证是否要发送请求
+  let unRequest = 0;
+  // 设置返回数据的总条数
+  let listDataLength = 12;
+  // 声明一个变量保存计时器 用来记录视频加载时间
+  let timeout = '';
+
+  // // 监听屏幕宽度
+  // $(window).resize(function() {
+  //   let width = $(this).width();
+  //   if (width <= 770) {
+  //   }
+  //   let height = $(this).height();
+  // });
+  // 设置一个变量 限制在初始化完成前不能重复发送请求
+  let againRequest = true;
   // i 分页 requestObj请求携带的参数  clearElement是否清空后再赋值0 不清空 1 清空 str 菜单栏点击的内容
+
   let getData = (i, requestObj, clearElement, str) => {
+    // 如果上一次请求返回的数据不足设定的条数 就设置计时器并且关闭遮罩层
+    if (unRequest || !againRequest) {
+      setTimeout(() => {
+        $('.element_video.flexbox')
+          .find('.hidden_tip')
+          .fadeIn();
+      }, 3000);
+      return;
+    }
     let reqData = '';
     // 参数来源于下拉菜单
     if (requestObj && requestObj.type == 1) {
@@ -51,36 +74,38 @@ $(document).ready(function() {
     } else if (requestObj && requestObj.type == 0) {
       reqData = `tag_brief_name=${requestObj.tag_brief_name}`;
     }
+    // 发送请求前 清空计时器 关闭遮罩层
+    window.clearTimeout(timeout);
+    $(`#video_box_mark${i - 1}`).css('display', 'none');
     axios
       .get(
-        `${getBaseUrl}/api/themes?language=zh&page=${i}&per_page=16&${reqData}`
+        `${getBaseUrl}/api/themes?language=zh&page=${i}&per_page=${listDataLength}&${reqData}`
       )
       .then(res => {
         if (res.data.status === '1') {
+          againRequest = false;
           backData = res.data.data.list;
-          pageData = i;
-          // var data = {
-          //   list: backData.concat(res.data.data.list)
-          // };
-          // const html = template('list_temp2', data);
-          // $('#contentBoxList').html(html);
+          // 如果返回的数据条数不等于设置的条数 则没有数据了
+          if (backData.length !== listDataLength) unRequest = 1;
+          pageData = i + 1;
+          i = i + 1;
           let freeIcon = `<div class="free">免费</div>`;
-          if (i <= 1) {
-            backData.forEach(function(element, index) {
-              let videoObj = JSON.stringify({
-                title: element.title,
-                video_url: element.video_url
-              });
-              optionElement += `<li>
+          let videoObj = {};
+          backData.forEach(function(element, index) {
+            videoObj = JSON.stringify({
+              title: element.title,
+              video_url: element.video_url
+            });
+            optionElement += `<li>
               <div class="outer-box">
             ${element.is_free == 0 ? '' : freeIcon}
               <span class="hd-mark">HD</span>
                 <div class="show-box">
                   <div class="img-box">
                     <img src="${element.cover_thumb_url}" alt="" />
-                    <video width="100%" autoplay="autoplay" id="low_video loading${index}" preload="none" data-dataobj='${videoObj}' muted="false" loop="loop" poster="${
-                element.cover_thumb_url
-              }" src="${element.low_video_url}"></video>
+                    <video width="100%" autoplay="autoplay" id="low_video" class="video_class_name${i}" preload="none" data-dataobj='${videoObj}' muted="false" loop="loop" poster="${
+              element.cover_thumb_url
+            }" src="${element.low_video_url}"></video>
                   </div>
                   <div class="title-box">
                     <span>${element.title}</span>
@@ -94,40 +119,23 @@ $(document).ready(function() {
                 </div>
               </div>
             </li>`;
-            });
-            // 如果需要先清空之前的数据在进行赋值 下拉菜单的点击事件需要先清空
-            if (clearElement) $('#contentBoxList').empty();
-            $('#contentBoxList').append(optionElement);
-            optionElement = '';
-          } else {
-            backData.forEach(function(element, index) {
-              optionElement = `<li>
-               <div class="outer-box">
-               <p class="hd-mark">HD</p>
-                 <div class="show-box">
-                   <div class="img-box">
-                     <img src="${element.cover_thumb_url}" alt="" />
-                     <video width="100%" autoplay="autoplay" muted="muted" src="${
-                       element.low_video_url
-                     }" id="loading${i}"></video>
-                   </div>
-                   <div class="title-box">
-                     <span>${element.title}</span>
-                     <span>自由入模板</span>
-                   </div>
-                   <div class="title-box flexbox between use">
-                     <span><a href="../templateEdit/template.html?url=${
-                       element.cover_thumb_url
-                     }">使用</a></span>
-                   </div>
-                 </div>
-               </div>
-             </li>`;
-              $('#contentBoxList').append(optionElement);
-            });
-            // console.log('save');
-            // axios.post(`${saveBaseUrl}/saveData`, res.data.data);
-          }
+          });
+          // 如果需要先清空之前的数据在进行赋值 下拉菜单的点击事件需要先清空
+          if (clearElement) $('#contentBoxList').empty();
+          optionElement = `<div class="element_video flexbox j-start">
+                              <div id="video_box_mark${i}">
+                                <p class="closeIcon loading_drop hidden_tip video_mnark_close${i}" id="closeIcon2">×</p>
+                                 <div class="markbox rel_center">
+                                  <div class="loading_box rel_center">
+                                    <div class="inner"></div>
+                                    <P class="hidden_tip">视频加载时间过长 您可以手动关闭遮罩层或者继续等待</P>
+                                  </div>
+                                </div>
+                              </div>
+                              ${optionElement}
+                          </div>`;
+          $('#contentBoxList .video_inner_box').append(optionElement);
+          optionElement = '';
           mouseEvent();
           // 请求回来后显示页尾
           $('.footerBox').css('display', 'block');
@@ -241,14 +249,32 @@ $(document).ready(function() {
               .find('h2')
               .html(str);
           }
-          let video = document.getElementById('loading' + 1);
-          console.log(video);
-
-          video.addEventListener('loadedmetadata', function(e) {
-            // 视频加载完成关闭遮罩层
-            $('#droupTopbox').css('display', 'none');
-            console.log('active');
+          let video = '';
+          video = document.getElementsByClassName('video_class_name' + i)[0];
+          // 设置计时器 如果视频加载时间太长 显示关闭按钮 让用户可以手动关闭遮罩层
+          timeout = setTimeout(() => {
+            // 如果5秒后视频还未加载完成 允许发送二次请求
+            againRequest = true;
+            $('.element_video.flexbox')
+              .find('.hidden_tip')
+              .fadeIn();
+          }, 5000);
+          // 遮罩层关闭按钮点击事件
+          $(document).on('click', `.video_mnark_close${i}`, function() {
+            // 视频加载完成后允许发送二次请求
+            $(`#video_box_mark${i}`).css('display', 'none');
           });
+          // 监听视频是否加载完成
+          video.addEventListener('loadedmetadata', function(e) {
+            time = 0;
+            againRequest = true;
+            console.log(againRequest);
+            // 视频加载完成关闭遮罩层
+            $(`#video_box_mark${i}`).css('display', 'none');
+            // // 清除计时器
+            window.clearTimeout(timeout);
+          });
+
           $('.free').css('display', 'block');
         } else {
           this.$message.error('请求失败');
@@ -379,7 +405,9 @@ $(document).ready(function() {
       window.innerHeight ||
       document.documentElement.clientHeight ||
       document.body.clientHeight; //浏览器高度
-    if (scrollTop + windowHeight == scrollHeight) {
+    console.log(scrollTop + windowHeight, scrollHeight);
+
+    if (scrollTop + windowHeight == scrollHeight - 400 || pageData === 2) {
       // console.log(
       //   '距顶部' +
       //     scrollTop +
@@ -388,7 +416,7 @@ $(document).ready(function() {
       //     '滚动条总高度' +
       //     scrollHeight
       // );
-      pageData++;
+
       getData(pageData);
       mouseEvent();
     }

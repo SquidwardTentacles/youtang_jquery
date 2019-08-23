@@ -13,7 +13,25 @@
   height: 80px;
   margin: auto;
 }
-#droupTopbox .loading_drop.closeIcon#closeIcon2 {
+/* 视频页loading */
+.element_video .loading_drop.closeIcon#closeIcon2 {
+  position: absolute;
+  z-index: 999999;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+.element_video .loading_box {
+  width: 400px;
+}
+.element_video .loading_box p {
+  white-space: nowrap;
+  color: #fff;
+}
+.element_video .hidden_tip {
+  display: none;
+}
+.loading_drop.closeIcon#closeIcon2 {
   background-color: #fff;
   width: 30px;
   height: 30px;
@@ -201,8 +219,18 @@
   margin-top: 10px;
   min-width: 190px;
 }
-.content-box ul {
+.content-box .element_video {
   flex-wrap: wrap;
+  position: relative;
+}
+.element_video .markbox {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+}
+.element_video .markbox .loading_box {
+  z-index: 999999;
 }
 .content-box ul li .outer-box {
   width: 90%;
@@ -378,7 +406,7 @@
   padding: 10px;
 }
 .dropupBox.flexbox {
-  /* display: none; */
+  display: none;
   position: fixed;
   z-index: 1000000;
   width: 100%;
@@ -426,7 +454,6 @@
 .footerBox ul li .chooseMessage {
   text-align: left;
 }
-
 .dropupBox .video-box {
   width: 900px;
   height: 390px;
