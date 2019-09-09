@@ -1,0 +1,12 @@
+INSERT INTO `statistics` VALUES (25, 1129, 0, 0, 2, 0);
+INSERT INTO `statistics` VALUES (26, 1128, 0, 10, 23, 0);
+INSERT INTO `statistics` VALUES (27, 1103, 0, 0, 2, 0);
+INSERT INTO `statistics` VALUES (28, 1126, 0, 20, 22, 0);
+INSERT INTO `statistics` VALUES (29, 1127, 0, 8, 32, 3);
+INSERT INTO `statistics` VALUES (30, 1123, 0, 0, 2, 0);
+INSERT INTO `statistics` VALUES (31, 1109, 0, 0, 2, 0);
+INSERT INTO `statistics` VALUES (32, 1125, 0, 0, 2, 0);
+INSERT INTO `statistics` VALUES (33, 1122, 0, 0, 2, 0);
+INSERT INTO `statistics` VALUES (34, 1096, 0, 0, 3, 0);
+INSERT INTO `statistics` VALUES (35, 1072, 0, 0, 3, 0);
+INSERT INTO `statistics` VALUES (36, 1119, 0, 0, 2, 0);

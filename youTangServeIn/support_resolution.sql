@@ -1,0 +1,12 @@
+INSERT INTO `support_resolution` VALUES (25, 1128, '16x9', '1x1', '9x16');
+INSERT INTO `support_resolution` VALUES (26, 1127, '16x9', '1x1', '9x16');
+INSERT INTO `support_resolution` VALUES (27, 1129, '16x9', '1x1', '9x16');
+INSERT INTO `support_resolution` VALUES (28, 1126, '16x9', '1x1', '9x16');
+INSERT INTO `support_resolution` VALUES (29, 1103, '16x9', '9x16', '1x1');
+INSERT INTO `support_resolution` VALUES (30, 1123, '16x9', '1x1', '9x16');
+INSERT INTO `support_resolution` VALUES (31, 1072, '16x9', '9x16', '1x1');
+INSERT INTO `support_resolution` VALUES (32, 1125, '16x9', '9x16', '1x1');
+INSERT INTO `support_resolution` VALUES (33, 1122, '16x9', '9x16', '1x1');
+INSERT INTO `support_resolution` VALUES (34, 1096, '16x9', '1x1', '9x16');
+INSERT INTO `support_resolution` VALUES (35, 1109, '16x9', '1x1', '9x16');
+INSERT INTO `support_resolution` VALUES (36, 1119, '16x9', '9x16', '1x1');
