@@ -17,8 +17,55 @@ https.get(`${baseUrl}themes?language=zh&page=2&per_page=12`, data => {
 
 // exports.saveData = (req, res) => {
 // let reqobj = req.body;
+videoSaveFunc = videoUrl => {
+  // let videoUrl = reqobj.list[0].low_video_url;
+  // 截取到视频名称
+  let videdName = videoUrl.split('/')[4] + '.mp4';
+  https.get(videoUrl, data => {
+    var size = 0;
+    let str = [];
+    data.on('data', chunk => {
+      str.push(chunk);
+      size += chunk.length;
+    });
+    data.on('end', () => {
+      var data = null;
+      switch (str.length) {
+        case 0:
+          data = new Buffer(0);
+          break;
+        case 1:
+          data = str[0];
+          break;
+        default:
+          data = new Buffer(size);
+          for (var i = 0, pos = 0, l = str.length; i < l; i++) {
+            var chunk = str[i];
+            chunk.copy(data, pos);
+            pos += chunk.length;
+          }
+          break;
+      }
+      console.log(data);
+      fs.writeFile(
+        path.join(__dirname, '../satatic/video') + '/' + videdName,
+        data,
+        function(err) {
+          let response = {};
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(videdName + '视频存储成功');
+          }
+          console.log(response);
+        }
+      );
+    });
+  });
+};
 saveData = reqobj => {
   for (let i = 0; i < reqobj.list.length; i++) {
+    videoSaveFunc(reqobj.list[i].low_video_url);
     let theme_idL = reqobj.list[i].theme_id;
     // videoArr.push(reqobj.list[i].low_video_url);
     let videoImgSessondata = {
