@@ -3,28 +3,17 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-// 发送请求 获取数据
-let baseUrl = 'https://lightmvapi.aoscdn.com/api/';
-https.get(`${baseUrl}themes?language=zh&page=2&per_page=12`, data => {
-  let str = '';
-  data.on('data', chunk => {
-    str += chunk;
-  });
-  data.on('end', () => {
-    saveData(JSON.parse(str).data);
-  });
-});
-
 // exports.saveData = (req, res) => {
 // let reqobj = req.body;
 // 存储视频方法封装
 videoSaveFunc = videoUrl => {
-  // 截取到视频名称
+  // 截取到视频名称 这里通过连接来获取文件名称以及相关文件类型
   let nameArr = videoUrl.split('?')[0].split('/');
   let fileName = nameArr[nameArr.length - 1];
   // 声明文件存储路径
   let fileEnd = fileName.split('.');
   let savePath = '';
+  // 通过文件名称的后缀判断文件类型 用于存储文件时拼接文件名称以及文件后缀
   if (fileEnd[fileEnd.length - 1] === 'mp4') {
     savePath = path.join(__dirname, '../satatic/video') + '/' + fileName;
   } else {
@@ -34,15 +23,17 @@ videoSaveFunc = videoUrl => {
   https.get(videoUrl, data => {
     let bufferArr = [];
     data.on('data', chunk => {
+      // 数据不会一次性返回 分多次返回数据 所以这里将每次返回的数据都存储在了数组中 方便后续处理
       bufferArr.push(chunk);
     });
+    // 数据已经全部返回
     data.on('end', () => {
-      var data = null;
       // 初始化一个buffer对象
-      data = Buffer.from(bufferArr[0]);
+      let data = Buffer.from(bufferArr[0]);
       // 如果存储buffer对象的数组长度大于1 就拼接buffer对象
       if (bufferArr.length > 1) {
-        for (var i = 1; i < bufferArr.length; i++) {
+        for (let i = 1; i < bufferArr.length; i++) {
+          // 将多条buffer对象拼接
           data = Buffer.concat([data, bufferArr[i]]);
         }
       }
@@ -60,9 +51,9 @@ videoSaveFunc = videoUrl => {
 saveData = reqobj => {
   for (let i = 0; i < reqobj.list.length; i++) {
     // 存储图片
-    videoSaveFunc(reqobj.list[i].cover_thumb_url);
+    // videoSaveFunc(reqobj.list[i].cover_thumb_url);
     // 存储视频
-    videoSaveFunc(reqobj.list[i].low_video_url);
+    // videoSaveFunc(reqobj.list[i].low_video_url);
     // 调用视频存储函数
     let theme_idL = reqobj.list[i].theme_id;
     let videoImgSessondata = {
