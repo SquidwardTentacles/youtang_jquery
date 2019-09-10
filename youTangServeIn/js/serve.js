@@ -17,36 +17,28 @@ https.get(`${baseUrl}themes?language=zh&page=2&per_page=12`, data => {
 
 // exports.saveData = (req, res) => {
 // let reqobj = req.body;
+// 存储视频方法封装
 videoSaveFunc = videoUrl => {
-  // let videoUrl = reqobj.list[0].low_video_url;
   // 截取到视频名称
-  let videdName = videoUrl.split('/')[4] + '.mp4';
+  let nameArr = videoUrl.split('/');
+  let videdName = nameArr[nameArr.length - 1].split('?')[0];
+  //发送请求获取相关文件信息
   https.get(videoUrl, data => {
-    var size = 0;
-    let str = [];
+    let bufferArr = [];
     data.on('data', chunk => {
-      str.push(chunk);
-      size += chunk.length;
+      bufferArr.push(chunk);
     });
     data.on('end', () => {
       var data = null;
-      switch (str.length) {
-        case 0:
-          data = new Buffer(0);
-          break;
-        case 1:
-          data = str[0];
-          break;
-        default:
-          data = new Buffer(size);
-          for (var i = 0, pos = 0, l = str.length; i < l; i++) {
-            var chunk = str[i];
-            chunk.copy(data, pos);
-            pos += chunk.length;
-          }
-          break;
+      // 初始化一个buffer对象
+      data = Buffer.from(bufferArr[0]);
+      // 如果存储buffer对象的数组长度大于1 就拼接buffer对象
+      if (bufferArr.length > 1) {
+        for (var i = 1; i < bufferArr.length; i++) {
+          data = Buffer.concat([data, bufferArr[i]]);
+        }
       }
-      console.log(data);
+      // 写入文件
       fs.writeFile(
         path.join(__dirname, '../satatic/video') + '/' + videdName,
         data,
@@ -66,8 +58,8 @@ videoSaveFunc = videoUrl => {
 saveData = reqobj => {
   for (let i = 0; i < reqobj.list.length; i++) {
     videoSaveFunc(reqobj.list[i].low_video_url);
+    // 调用视频存储函数
     let theme_idL = reqobj.list[i].theme_id;
-    // videoArr.push(reqobj.list[i].low_video_url);
     let videoImgSessondata = {
       cover_thumb_url: reqobj.list[i].cover_thumb_url,
       cover_url: reqobj.list[i].cover_url,
