@@ -43,13 +43,11 @@ videoSaveFunc = videoUrl => {
         path.join(__dirname, '../satatic/video') + '/' + videdName,
         data,
         function(err) {
-          let response = {};
           if (err) {
             console.log(err);
           } else {
             console.log(videdName + '视频存储成功');
           }
-          console.log(response);
         }
       );
     });
