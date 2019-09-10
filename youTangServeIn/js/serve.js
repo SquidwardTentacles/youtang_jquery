@@ -20,8 +20,16 @@ https.get(`${baseUrl}themes?language=zh&page=2&per_page=12`, data => {
 // 存储视频方法封装
 videoSaveFunc = videoUrl => {
   // 截取到视频名称
-  let nameArr = videoUrl.split('/');
-  let videdName = nameArr[nameArr.length - 1].split('?')[0];
+  let nameArr = videoUrl.split('?')[0].split('/');
+  let fileName = nameArr[nameArr.length - 1];
+  // 声明文件存储路径
+  let fileEnd = fileName.split('.');
+  let savePath = '';
+  if (fileEnd[fileEnd.length - 1] === 'mp4') {
+    savePath = path.join(__dirname, '../satatic/video') + '/' + fileName;
+  } else {
+    savePath = path.join(__dirname, '../satatic/image') + '/' + fileName;
+  }
   //发送请求获取相关文件信息
   https.get(videoUrl, data => {
     let bufferArr = [];
@@ -39,22 +47,21 @@ videoSaveFunc = videoUrl => {
         }
       }
       // 写入文件
-      fs.writeFile(
-        path.join(__dirname, '../satatic/video') + '/' + videdName,
-        data,
-        function(err) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log(videdName + '视频存储成功');
-          }
+      fs.writeFile(savePath, data, function(err) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(fileName + '存储成功');
         }
-      );
+      });
     });
   });
 };
 saveData = reqobj => {
   for (let i = 0; i < reqobj.list.length; i++) {
+    // 存储图片
+    videoSaveFunc(reqobj.list[i].cover_thumb_url);
+    // 存储视频
     videoSaveFunc(reqobj.list[i].low_video_url);
     // 调用视频存储函数
     let theme_idL = reqobj.list[i].theme_id;
