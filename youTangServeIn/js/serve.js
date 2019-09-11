@@ -5,16 +5,26 @@ const https = require('https');
 
 // exports.saveData = (req, res) => {
 // let reqobj = req.body;
-
+let url =
+  'https://lightmvapi.aoscdn.com/api/themes?language=zh&page=1&per_page=12&';
+https.get(url, data => {
+  let str = '';
+  data.on('data', chunk => {
+    str += chunk;
+  });
+  data.on('end', () => {
+    saveData(JSON.parse(str).data);
+  });
+});
 // 存储视频方法封装
 videoSaveFunc = videoUrl => {
   // 截取到视频名称 这里通过连接来获取文件名称以及相关文件类型
   let nameArr = videoUrl.split('?')[0].split('/');
+  // console.log(String(videoUrl));
   let fileName = nameArr[nameArr.length - 1];
   // 声明文件存储路径
   let fileEnd = fileName.split('.')[fileName.split('.').length - 1];
   let savePath = '';
-  console.log(videoUrl);
   // 通过文件名称的后缀判断文件类型 用于存储文件时拼接文件名称以及文件后缀
   // 创建一个变量保存文件夹名称
   let dirName = '';
@@ -26,47 +36,48 @@ videoSaveFunc = videoUrl => {
     dirName = 'filedir';
   }
   let pathl = path.join(__dirname, '../satatic/' + dirName);
-
   // 首先判断文件夹是否存在 不存在则创建
-  fs.exists(pathl, exist => {
-    if (!exist) {
-      // 文件夹不存在就新建
-      fs.mkdir(pathl, err => {
-        console.log(err, 'err');
-        if (err) return false;
-      });
-    }
-  });
+  let exDir = fs.existsSync(pathl);
+  if (!exDir) {
+    fs.mkdir(pathl, err => {
+      if (err) console.log(err, 'errDIR');
+    });
+  }
   savePath = pathl + '/' + fileName;
-
-  //发送请求获取相关文件信息
-  https.get(videoUrl, data => {
-    let bufferArr = [];
-    data.on('data', chunk => {
-      // 数据不会一次性返回 分多次返回数据 所以这里将每次返回的数据都存储在了数组中 方便后续处理
-      bufferArr.push(chunk);
-    });
-    // 数据已经全部返回
-    data.on('end', () => {
-      // 初始化一个buffer对象
-      let data = Buffer.from(bufferArr[0]);
-      // 如果存储buffer对象的数组长度大于1 就拼接buffer对象
-      if (bufferArr.length > 1) {
-        for (let i = 1; i < bufferArr.length; i++) {
-          // 将多条buffer对象拼接
-          data = Buffer.concat([data, bufferArr[i]]);
+  // 检查是否存在文件（同步检测）
+  let exFile = fs.existsSync(savePath);
+  //发送请求获取相关文件信息 判断是否存在文件 不存在就创建
+  if (!exFile) {
+    https.get(videoUrl, data => {
+      let bufferArr = [];
+      data.on('data', chunk => {
+        // 数据不会一次性返回 分多次返回数据 所以这里将每次返回的数据都存储在了数组中 方便后续处理
+        bufferArr.push(chunk);
+      });
+      // 数据已经全部返回
+      data.on('end', () => {
+        // 初始化一个buffer对象
+        let data = Buffer.from(bufferArr[0]);
+        // 如果存储buffer对象的数组长度大于1 就拼接buffer对象
+        if (bufferArr.length > 1) {
+          for (let i = 1; i < bufferArr.length; i++) {
+            // 将多条buffer对象拼接
+            data = Buffer.concat([data, bufferArr[i]]);
+          }
         }
-      }
-      // 写入文件
-      fs.writeFile(savePath, data, function(err) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(fileName + '存储成功');
-        }
+        // 写入文件
+        fs.writeFile(savePath, data, function(err) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(fileName + '存储成功');
+          }
+        });
       });
     });
-  });
+  } else {
+    console.log(fileName + '已存在');
+  }
 };
 // 下载音乐
 // videoSaveFunc(
@@ -75,9 +86,14 @@ videoSaveFunc = videoUrl => {
 saveData = reqobj => {
   for (let i = 0; i < reqobj.list.length; i++) {
     // 存储图片
-    videoSaveFunc(reqobj.list[i].cover_thumb_url);
+    if (reqobj.list[i].cover_thumb_url) {
+      videoSaveFunc(reqobj.list[i].cover_thumb_url);
+    }
     // 存储视频
-    videoSaveFunc(reqobj.list[i].low_video_url);
+    if (reqobj.list[i].low_video_url) {
+      videoSaveFunc(reqobj.list[i].low_video_url);
+    }
+
     // 调用视频存储函数
     let theme_idL = reqobj.list[i].theme_id;
     let videoImgSessondata = {
