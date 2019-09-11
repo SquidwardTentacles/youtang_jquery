@@ -5,20 +5,40 @@ const https = require('https');
 
 // exports.saveData = (req, res) => {
 // let reqobj = req.body;
+
 // 存储视频方法封装
 videoSaveFunc = videoUrl => {
   // 截取到视频名称 这里通过连接来获取文件名称以及相关文件类型
   let nameArr = videoUrl.split('?')[0].split('/');
   let fileName = nameArr[nameArr.length - 1];
   // 声明文件存储路径
-  let fileEnd = fileName.split('.');
+  let fileEnd = fileName.split('.')[fileName.split('.').length - 1];
   let savePath = '';
+  console.log(videoUrl);
   // 通过文件名称的后缀判断文件类型 用于存储文件时拼接文件名称以及文件后缀
-  if (fileEnd[fileEnd.length - 1] === 'mp4') {
-    savePath = path.join(__dirname, '../satatic/video') + '/' + fileName;
+  // 创建一个变量保存文件夹名称
+  let dirName = '';
+  if (fileEnd === 'mp4') {
+    dirName = 'video';
+  } else if (fileEnd === 'jpg') {
+    dirName = 'image';
   } else {
-    savePath = path.join(__dirname, '../satatic/image') + '/' + fileName;
+    dirName = 'filedir';
   }
+  let pathl = path.join(__dirname, '../satatic/' + dirName);
+
+  // 首先判断文件夹是否存在 不存在则创建
+  fs.exists(pathl, exist => {
+    if (!exist) {
+      // 文件夹不存在就新建
+      fs.mkdir(pathl, err => {
+        console.log(err, 'err');
+        if (err) return false;
+      });
+    }
+  });
+  savePath = pathl + '/' + fileName;
+
   //发送请求获取相关文件信息
   https.get(videoUrl, data => {
     let bufferArr = [];
@@ -48,12 +68,16 @@ videoSaveFunc = videoUrl => {
     });
   });
 };
+// 下载音乐
+// videoSaveFunc(
+//   'https://webfs.yun.kugou.com/201909101726/a2623a86ba7bbcc8b0cc245037fff9a2/G164/M09/01/13/RIcBAF1oDYqAG2fBADzLmbQBtjQ851.mp3'
+// );
 saveData = reqobj => {
   for (let i = 0; i < reqobj.list.length; i++) {
     // 存储图片
-    // videoSaveFunc(reqobj.list[i].cover_thumb_url);
+    videoSaveFunc(reqobj.list[i].cover_thumb_url);
     // 存储视频
-    // videoSaveFunc(reqobj.list[i].low_video_url);
+    videoSaveFunc(reqobj.list[i].low_video_url);
     // 调用视频存储函数
     let theme_idL = reqobj.list[i].theme_id;
     let videoImgSessondata = {
