@@ -3,8 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-// exports.saveData = (req, res) => {
-// let reqobj = req.body;
+// 发送请求获取返回数据
 let url =
   'https://lightmvapi.aoscdn.com/api/themes?language=zh&page=1&per_page=12&';
 https.get(url, data => {
@@ -16,11 +15,11 @@ https.get(url, data => {
     saveData(JSON.parse(str).data);
   });
 });
-// 存储视频方法封装
-videoSaveFunc = videoUrl => {
+// 存储视频方法封装 文件地址 文件总数 当前文件索引
+videoSaveFunc = (fileUrl, fileLength, curFile) => {
   // 截取到视频名称 这里通过连接来获取文件名称以及相关文件类型
-  let nameArr = videoUrl.split('?')[0].split('/');
-  // console.log(String(videoUrl));
+  let nameArr = fileUrl.split('?')[0].split('/');
+  // console.log(String(fileUrl));
   let fileName = nameArr[nameArr.length - 1];
   // 声明文件存储路径
   let fileEnd = fileName.split('.')[fileName.split('.').length - 1];
@@ -48,7 +47,7 @@ videoSaveFunc = videoUrl => {
   let exFile = fs.existsSync(savePath);
   //发送请求获取相关文件信息 判断是否存在文件 不存在就创建
   if (!exFile) {
-    https.get(videoUrl, data => {
+    https.get(fileUrl, data => {
       let bufferArr = [];
       data.on('data', chunk => {
         // 数据不会一次性返回 分多次返回数据 所以这里将每次返回的数据都存储在了数组中 方便后续处理
@@ -71,12 +70,18 @@ videoSaveFunc = videoUrl => {
             console.log(err);
           } else {
             console.log(fileName + '存储成功');
+            if (fileLength && curFile) {
+              if (fileLength == curFile + 1) console.log('文件存储完毕');
+            }
           }
         });
       });
     });
   } else {
     console.log(fileName + '已存在');
+    if (fileLength && curFile) {
+      if (fileLength == curFile + 1) console.log('文件存储完毕');
+    }
   }
 };
 // 下载音乐
@@ -87,11 +92,11 @@ saveData = reqobj => {
   for (let i = 0; i < reqobj.list.length; i++) {
     // 存储图片
     if (reqobj.list[i].cover_thumb_url) {
-      videoSaveFunc(reqobj.list[i].cover_thumb_url);
+      videoSaveFunc(reqobj.list[i].cover_thumb_url, reqobj.list.length, i);
     }
     // 存储视频
     if (reqobj.list[i].low_video_url) {
-      videoSaveFunc(reqobj.list[i].low_video_url);
+      videoSaveFunc(reqobj.list[i].low_video_url, reqobj.list.length, i);
     }
 
     // 调用视频存储函数
