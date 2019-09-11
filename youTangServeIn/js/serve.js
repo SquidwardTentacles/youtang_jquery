@@ -90,16 +90,7 @@ videoSaveFunc = (fileUrl, fileLength, curFile) => {
 // );
 saveData = reqobj => {
   for (let i = 0; i < reqobj.list.length; i++) {
-    // 存储图片
-    if (reqobj.list[i].cover_thumb_url) {
-      videoSaveFunc(reqobj.list[i].cover_thumb_url, reqobj.list.length, i);
-    }
-    // 存储视频
-    if (reqobj.list[i].low_video_url) {
-      videoSaveFunc(reqobj.list[i].low_video_url, reqobj.list.length, i);
-    }
-
-    // 调用视频存储函数
+    // 数据库数据存储
     let theme_idL = reqobj.list[i].theme_id;
     let videoImgSessondata = {
       cover_thumb_url: reqobj.list[i].cover_thumb_url,
@@ -129,6 +120,16 @@ saveData = reqobj => {
       2: reqobj.list[i].support_resolution[2]
     };
     saveFunc('support_resolution', uspportData, theme_idL);
+
+    // 文件存储
+    // 存储图片
+    if (reqobj.list[i].cover_thumb_url) {
+      videoSaveFunc(reqobj.list[i].cover_thumb_url, reqobj.list.length, i);
+    }
+    // 存储视频
+    if (reqobj.list[i].low_video_url) {
+      videoSaveFunc(reqobj.list[i].low_video_url, reqobj.list.length, i);
+    }
   }
 };
 let saveFunc = (dataBase, setData, id) => {
