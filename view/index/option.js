@@ -4,7 +4,6 @@ $(document).ready(function() {
   // 设置axios默认的请求地址
   // axios.defaults.baseURL = 'https://lightmvapi.aoscdn.com';
   let getBaseUrl = 'https://lightmvapi.aoscdn.com';
-  let saveBaseUrl = 'http://localhost:8090';
   // 主界面的事件
   // 发送请求
   // 主界面内容数组
@@ -61,11 +60,7 @@ $(document).ready(function() {
     // 参数来源于下拉菜单
     if (requestObj && requestObj.type == 1) {
       // 如果传递过来了参数 则拼接参数-
-      reqData = `theme_resource_type=${
-        requestObj.theme_resource_type
-      }&charge_type=${requestObj.charge_type}&composition_type=${
-        requestObj.composition_type
-      }&order_field=${requestObj.order_field}`;
+      reqData = `theme_resource_type=${requestObj.theme_resource_type}&charge_type=${requestObj.charge_type}&composition_type=${requestObj.composition_type}&order_field=${requestObj.order_field}`;
       // 如果对象中有尺寸字段则拼接尺寸 0也不会拼接
       if (requestObj.theme_resolution) {
         reqData += `&theme_resolution=${requestObj.theme_resolution}`;
@@ -268,7 +263,7 @@ $(document).ready(function() {
           video.addEventListener('loadedmetadata', function(e) {
             time = 0;
             againRequest = true;
-            console.log(againRequest);
+            // console.log(againRequest);
             // 视频加载完成关闭遮罩层
             $(`#video_box_mark${i}`).css('display', 'none');
             // // 清除计时器
@@ -405,7 +400,7 @@ $(document).ready(function() {
       window.innerHeight ||
       document.documentElement.clientHeight ||
       document.body.clientHeight; //浏览器高度
-    console.log(scrollTop + windowHeight, scrollHeight);
+    // console.log(scrollTop + windowHeight, scrollHeight);
 
     if (scrollTop + windowHeight == scrollHeight) {
       // console.log(
@@ -492,4 +487,16 @@ $(document).ready(function() {
   //   // 弹出框内语言栏的隐藏
   //   $('#dropUl').css('display', 'none');
   // });
+
+  // 向后台发送请求获取数据
+  axios.get('http://localhost:3000/getImgUrl?fileType=image').then(res => {
+    console.log(res);
+    console.log(res.data);
+    if (res.data) {
+      let imgstr = `<img src='${res.data}' />`;
+      // let videoUrl = `<video autoplay src="${res.data}"></video>`;
+      $('#backimgshow').append(imgstr);
+      // $('#backimgshow').append(videoUrl);
+    }
+  });
 });

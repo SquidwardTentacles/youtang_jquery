@@ -7,5 +7,6 @@ const serve = require('./serve');
 // router.post('/saveData', serve.saveData);
 // 文件上传
 router.post('/filesUpdate', multipartMiddleware, serve.filesUpdate);
-
+// 前端请求获取文件
+router.get('/getImgUrl', serve.getImgUrl);
 module.exports = router;

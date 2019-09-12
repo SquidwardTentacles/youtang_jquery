@@ -4,19 +4,18 @@ const path = require('path');
 const https = require('https');
 
 // 发送请求获取返回数据
-let url =
-  'https://lightmvapi.aoscdn.com/api/themes?language=zh&page=1&per_page=12&';
-https.get(url, data => {
-  let str = '';
-  data.on('data', chunk => {
-    str += chunk;
-  });
-  data.on('end', () => {
-    saveData(JSON.parse(str).data);
-  });
-});
+let url = 'https://lightmvapi.aoscdn.com/api/themes?language=zh&per_page=1';
+// https.get(url, data => {
+//   let str = '';
+//   data.on('data', chunk => {
+//     str += chunk;
+//   });
+//   data.on('end', () => {
+//     saveData(JSON.parse(str).data);
+//   });
+// });
 // 存储视频方法封装 文件地址 文件总数 当前文件索引
-videoSaveFunc = (fileUrl, fileLength, curFile) => {
+videoSaveFunc = (fileUrl, fileLength, curFile, title) => {
   // 截取到视频名称 这里通过连接来获取文件名称以及相关文件类型
   let nameArr = fileUrl.split('?')[0].split('/');
   // console.log(String(fileUrl));
@@ -42,7 +41,9 @@ videoSaveFunc = (fileUrl, fileLength, curFile) => {
       if (err) console.log(err, 'errDIR');
     });
   }
-  savePath = pathl + '/' + fileName;
+  savePath = title
+    ? pathl + '/' + title + ',' + fileName
+    : pathl + '/' + fileName;
   // 检查是否存在文件（同步检测）
   let exFile = fs.existsSync(savePath);
   //发送请求获取相关文件信息 判断是否存在文件 不存在就创建
@@ -124,11 +125,21 @@ saveData = reqobj => {
     // 文件存储
     // 存储图片
     if (reqobj.list[i].cover_thumb_url) {
-      videoSaveFunc(reqobj.list[i].cover_thumb_url, reqobj.list.length, i);
+      videoSaveFunc(
+        reqobj.list[i].cover_thumb_url,
+        reqobj.list.length,
+        i,
+        reqobj.list[i].title
+      );
     }
     // 存储视频
     if (reqobj.list[i].low_video_url) {
-      videoSaveFunc(reqobj.list[i].low_video_url, reqobj.list.length, i);
+      videoSaveFunc(
+        reqobj.list[i].low_video_url,
+        reqobj.list.length,
+        i,
+        reqobj.list[i].title
+      );
     }
   }
 };
@@ -175,6 +186,40 @@ exports.filesUpdate = (req, res) => {
       }
       console.log(response);
       res.end(JSON.stringify(response));
+    });
+  });
+};
+
+exports.getImgUrl = (req, res) => {
+  console.log(req.query.fileType);
+  let fileDirType = '';
+  if (req.query.fileType == 'image') {
+    fileDirType = 'image';
+  } else if (req.query.fileType == 'video') {
+    fileDirType = 'video';
+  }
+  let dirImgPath = path.resolve((__dirname, `satatic/${fileDirType}`));
+  console.log(dirImgPath, 'path');
+
+  fs.readdir(dirImgPath, (err, files) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    console.log(files);
+
+    let filePath = path.join(dirImgPath + '/') + files[0];
+    fs.readFile(filePath, (err, data) => {
+      if (err) console.log(err);
+      console.log(data);
+      var base64 = new Buffer(data).toString('base64');
+
+      res.end(
+        `data:${fileDirType}/${
+          files[0].split('.')[files[0].split('.').length - 1]
+        };base64,` + base64.replace(/=+$/, '')
+      );
     });
   });
 };
